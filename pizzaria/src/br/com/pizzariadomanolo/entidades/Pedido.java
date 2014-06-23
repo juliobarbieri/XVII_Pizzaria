@@ -11,17 +11,25 @@ public class Pedido {
 	public String getTelefone() {
 		return telefone;
 	}
+	
 	public String getData() {
 		return data;
 	}
+	
 	public String getHora() {
 		return hora;
 	}
+	
 	public String getNomePizza() {
 		return nomePizza;
 	}
+	
 	public Integer getQuantidade() {
 		return quantidade;
+	}
+	
+	public void cadastrarPedido() {
+		
 	}
 	
 	

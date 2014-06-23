@@ -17,4 +17,9 @@ public class Cliente {
 	public String getEndereco() {
 		return endereco;
 	}
+	
+	public void cadastrarCliente() {
+		
+
+	}
 }

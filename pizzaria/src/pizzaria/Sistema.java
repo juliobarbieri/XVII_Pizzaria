@@ -9,7 +9,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import br.com.pizzariadomanolo.entidades.Cardapio;
+import br.com.pizzariadomanolo.entidades.Cliente;
+import br.com.pizzariadomanolo.entidades.Pedido;
+
 public class Sistema {
+	
+	public static Cliente cliente;
+	public static Cardapio cardapio;
+	public static Pedido pedido;
 
 	public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -51,7 +59,7 @@ public class Sistema {
 		preco = reader.readLine();
 		String sql = "INSERT INTO CARDAPIO VALUES('"+nome_pizza+"', '"+ingredientes+"', '"+preco+"')";
 		Class.forName("org.postgresql.Driver").newInstance();
-		conexao = DriverManager.getConnection("jdbc:postgresql://192.168.122.199/pizza", "pizza", "pizza");
+		conexao = DriverManager.getConnection("jdbc:postgresql://localhost/pizza", "pizza", "pizza");
 		comandoSQL = conexao.createStatement();
 		comandoSQL.executeUpdate(sql);
 		System.out.println("NOVA PIZZA INSERIDA COM SUCESSO!");
@@ -70,7 +78,7 @@ public class Sistema {
 		System.out.println("TELEFONE DO CLIENTE: ");
 		telefone = reader.readLine();
 		Class.forName("org.postgresql.Driver").newInstance();
-		conexao = DriverManager.getConnection("jdbc:postgresql://192.168.122.199/pizza", "pizza", "pizza");
+		conexao = DriverManager.getConnection("jdbc:postgresql://localhost/pizza", "pizza", "pizza");
 		comandoSQL = conexao.createStatement();
 		resultado = comandoSQL.executeQuery("SELECT * FROM CLIENTE WHERE TELEFONE = '"+telefone+"'");
 		while (resultado.next()) {
@@ -114,7 +122,7 @@ public class Sistema {
 		endereco = reader.readLine();
 		String sql = "INSERT INTO CLIENTE VALUES('"+telefone+"', '"+nome+"', '"+endereco+"')";
 		Class.forName("org.postgresql.Driver").newInstance();
-		conexao = DriverManager.getConnection("jdbc:postgresql://192.168.122.199/pizza", "pizza", "pizza");
+		conexao = DriverManager.getConnection("jdbc:postgresql://localhost/pizza", "pizza", "pizza");
 		comandoSQL = conexao.createStatement();
 		comandoSQL.executeUpdate(sql);
 		System.out.println("CLIENTE INSERIDO COM SUCESSO!");
