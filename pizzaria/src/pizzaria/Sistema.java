@@ -15,9 +15,9 @@ import br.com.pizzariadomanolo.entidades.Pedido;
 
 public class Sistema {
 	
-	public static Cliente cliente;
-	public static Cardapio cardapio;
-	public static Pedido pedido;
+	public static Cliente cliente = new Cliente();
+	public static Cardapio cardapio = new Cardapio();
+	public static Pedido pedido = new Pedido();
 
 	public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -109,8 +109,6 @@ public class Sistema {
 	}
 
 	private static void cadastrar_cliente() throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		Connection conexao;
-		Statement comandoSQL;
 		
 		String telefone, nome, endereco;
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -120,11 +118,8 @@ public class Sistema {
 		nome = reader.readLine();
 		System.out.println("ENDERECO DO NOVO CLIENTE: ");
 		endereco = reader.readLine();
-		String sql = "INSERT INTO CLIENTE VALUES('"+telefone+"', '"+nome+"', '"+endereco+"')";
-		Class.forName("org.postgresql.Driver").newInstance();
-		conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/pizza", "postgres", "postgres");
-		comandoSQL = conexao.createStatement();
-		comandoSQL.executeUpdate(sql);
+		cliente.criaCliente(nome, telefone, endereco);
+		cliente.cadastrarCliente();
 		System.out.println("CLIENTE INSERIDO COM SUCESSO!");
 		System.in.read();
 	}
