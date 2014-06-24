@@ -35,18 +35,25 @@ public class Cliente {
 		this.endereco = null;
 	}
 	
-	public void cadastrarCliente() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	public boolean cadastrarCliente() {
 		Connection conexao;
 		PreparedStatement comandoSQL;
 		
 		String sql = "INSERT INTO CLIENTE VALUES(?, ?, ?)";		
-		Class.forName("org.postgresql.Driver").newInstance();
-		conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/pizza", "postgres", "postgres");
-		comandoSQL = conexao.prepareStatement(sql);
-		comandoSQL.setString(1, telefone);
-		comandoSQL.setString(2, nome);
-		comandoSQL.setString(3, endereco);
-		comandoSQL.executeUpdate();
+		try {
+			Class.forName("org.postgresql.Driver").newInstance();
+			conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/pizza", "postgres", "postgres");
+			comandoSQL = conexao.prepareStatement(sql);
+			comandoSQL.setString(1, telefone);
+			comandoSQL.setString(2, nome);
+			comandoSQL.setString(3, endereco);
+			comandoSQL.executeUpdate();
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			return false;
+		} catch (SQLException e) {
+			return false;
+		}
+		return true;
 
 	}
 }

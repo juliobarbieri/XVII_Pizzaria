@@ -108,7 +108,7 @@ public class Sistema {
 		
 	}
 
-	private static void cadastrar_cliente() throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	private static void cadastrar_cliente() throws IOException {
 		
 		String telefone, nome, endereco;
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -118,10 +118,19 @@ public class Sistema {
 		nome = reader.readLine();
 		System.out.println("ENDERECO DO NOVO CLIENTE: ");
 		endereco = reader.readLine();
+		
 		cliente.criaCliente(nome, telefone, endereco);
-		cliente.cadastrarCliente();
-		System.out.println("CLIENTE INSERIDO COM SUCESSO!");
-		System.in.read();
+		
+		if(cliente.cadastrarCliente()) {
+			System.out.println("CLIENTE INSERIDO COM SUCESSO!");
+			System.in.read();
+		}
+		else {
+			System.out.println("FALHA AO INSERIR NOVO CLIENTE, POR FAVOR REINSTALE O SISTEMA!");
+			System.exit(-1);
+		}
+		
+		cliente.clear();
 	}
 
 	
