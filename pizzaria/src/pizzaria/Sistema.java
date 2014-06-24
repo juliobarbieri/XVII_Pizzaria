@@ -3,15 +3,11 @@ package pizzaria;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-import br.com.pizzariadomanolo.entidades.Pizza;
 import br.com.pizzariadomanolo.entidades.Cliente;
 import br.com.pizzariadomanolo.entidades.Pedido;
+import br.com.pizzariadomanolo.entidades.Pizza;
 
 public class Sistema {
 	
@@ -72,31 +68,37 @@ public class Sistema {
 		
 	}
 
-	private static void cadastrar_pedido() throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		Connection conexao;
-		Statement comandoSQL;
-		ResultSet resultado;
-		
+	private static void cadastrar_pedido() throws IOException {
+
 		String telefone, nome_pizza;
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("TELEFONE DO CLIENTE: ");
 		telefone = reader.readLine();
-		Class.forName("org.postgresql.Driver").newInstance();
-		conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/pizza", "postgres", "postgres");
-		comandoSQL = conexao.createStatement();
-		resultado = comandoSQL.executeQuery("SELECT * FROM CLIENTE WHERE TELEFONE = '"+telefone+"'");
-		while (resultado.next()) {
-			System.out.println("NOME: "+resultado.getString("NOME"));
-			System.out.println("ENDERECO: "+resultado.getString("ENDERECO"));
+		
+		cliente.criaCliente(null, telefone, null);
+		
+		if(cliente.buscaCliente()) {
+			System.out.println("NOME: " + cliente.getNome());
+			System.out.println("ENDERECO: " + cliente.getEndereco());
+		
 		}
-		resultado.close();
+		else {
+			System.out.println("FALHA AO VERIFICAR A EXISTENCIA DO CLIENTE, POR FAVOR REINSTALE O SISTEMA!");
+			System.exit(-1);
+		}
+		
 		System.out.println("PIZZA: ");
 		nome_pizza = reader.readLine();
-		comandoSQL = conexao.createStatement();
-		resultado = comandoSQL.executeQuery("SELECT * FROM CARDAPIO WHERE NOME_PIZZA= '"+nome_pizza+"'");
-		while (resultado.next()) {
-			System.out.println("INGREDIENTES: "+resultado.getString("INGREDIENTES"));
-			System.out.println("PRECO: "+resultado.getString("PRECO"));
+		
+		pizza.setNomePizza(nome_pizza);
+		
+		if (pizza.buscaPizza()) {
+			System.out.println("INGREDIENTES: " + pizza.getIngredientes());
+			System.out.println("PRECO: "+ pizza.getPreco());
+		}
+		else {
+			System.out.println("FALHA AO VERIFICAR A EXISTENCIA DA PIZZA, POR FAVOR REINSTALE O SISTEMA!");
+			System.exit(-1);
 		}
 		
 		System.out.println("CONFIRMA?[S/N]");
@@ -104,10 +106,21 @@ public class Sistema {
 		if(opcao.equalsIgnoreCase("S")){
 			System.out.println("QUANTIDADE DESEJADA: ");
 			int quantidade = Integer.parseInt(reader.readLine());
-			comandoSQL.executeUpdate("INSERT INTO PEDIDO VALUES('"+telefone+"', current_timestamp, '"+nome_pizza+"', "+quantidade+")");
-			System.out.println("PEDIDO INSERIDO COM SUCESSO!");
-			System.in.read();
+			pedido.criaPedido(telefone, nome_pizza, quantidade);
+			
+			if(pedido.cadastrarPedido()) {
+				System.out.println("PEDIDO INSERIDO COM SUCESSO!");
+				System.in.read();
+			}
+			else {
+				System.out.println("FALHA AO ADICIONAR NOVO PEDIDO, POR FAVOR REINSTALE O SISTEMA!");
+				System.exit(-1);
+			}
 		}
+		
+		cliente.clear();
+		pizza.clear();
+		pedido.clear();
 		
 		
 	}
