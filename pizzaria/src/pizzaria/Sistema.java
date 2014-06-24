@@ -9,14 +9,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import br.com.pizzariadomanolo.entidades.Cardapio;
+import br.com.pizzariadomanolo.entidades.Pizza;
 import br.com.pizzariadomanolo.entidades.Cliente;
 import br.com.pizzariadomanolo.entidades.Pedido;
 
 public class Sistema {
 	
 	public static Cliente cliente = new Cliente();
-	public static Cardapio cardapio = new Cardapio();
+	public static Pizza pizza = new Pizza();
 	public static Pedido pedido = new Pedido();
 
 	public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
@@ -45,9 +45,7 @@ public class Sistema {
 		
 	}
 
-	private static void cadastrar_pizza() throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		Connection conexao;
-		Statement comandoSQL;
+	private static void cadastrar_pizza() throws IOException {
 		
 		String nome_pizza, ingredientes, preco;
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -57,13 +55,19 @@ public class Sistema {
 		ingredientes = reader.readLine();
 		System.out.println("PRECO DA NOVA PIZZA: ");
 		preco = reader.readLine();
-		String sql = "INSERT INTO CARDAPIO VALUES('"+nome_pizza+"', '"+ingredientes+"', '"+preco+"')";
-		Class.forName("org.postgresql.Driver").newInstance();
-		conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/pizza", "postgres", "postgres");
-		comandoSQL = conexao.createStatement();
-		comandoSQL.executeUpdate(sql);
-		System.out.println("NOVA PIZZA INSERIDA COM SUCESSO!");
-		System.in.read();
+		
+		pizza.criaPizza(nome_pizza, ingredientes, preco);
+		
+		if(pizza.cadastrarPizza()) {
+			System.out.println("NOVA PIZZA INSERIDA COM SUCESSO!");
+			System.in.read();
+		}
+		else {
+			System.out.println("FALHA AO INSERIR NOVA PIZZA, POR FAVOR REINSTALE O SISTEMA!");
+			System.exit(-1);
+		}
+		
+		pizza.clear();
 
 		
 	}
