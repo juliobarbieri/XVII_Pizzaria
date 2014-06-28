@@ -20,4 +20,4 @@ create table pedido_has_item (
 	pedido_id int,
 	item_id int,
 	constraint pk primary key (id),
-	constraint fk_pedido );
+	constraint fk_pedido foreign key (pedido_id) references pedido(id));
