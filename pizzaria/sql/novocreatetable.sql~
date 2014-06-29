@@ -9,7 +9,7 @@ create table item (
 	constraint fk_cardapio foreign key (nome_pizza) references cardapio(nome_pizza));
 
 create table pedido (
-	id serial
+	id serial,
 	telefone varchar, 
 	data_hora timestamp, 
 	constraint pk primary key (id), 
