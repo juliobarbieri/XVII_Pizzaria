@@ -78,9 +78,14 @@ public class Sistema {
 		cliente.criaCliente(null, telefone, null);
 		
 		if(cliente.buscaCliente()) {
-			System.out.println("NOME: " + cliente.getNome());
-			System.out.println("ENDERECO: " + cliente.getEndereco());
-		
+			if (cliente.getNome() != null) {
+				System.out.println("NOME: " + cliente.getNome());
+				System.out.println("ENDERECO: " + cliente.getEndereco());
+			}
+			else {
+				System.out.println("CLIENTE NÃO ENCONTRADO NOS REGISTROS!");
+				return;
+			}
 		}
 		else {
 			System.out.println("FALHA AO VERIFICAR A EXISTENCIA DO CLIENTE, POR FAVOR REINSTALE O SISTEMA!");
@@ -93,8 +98,14 @@ public class Sistema {
 		pizza.setNomePizza(nome_pizza);
 		
 		if (pizza.buscaPizza()) {
-			System.out.println("INGREDIENTES: " + pizza.getIngredientes());
-			System.out.println("PRECO: "+ pizza.getPreco());
+			if (pizza.getPreco() != null) {
+				System.out.println("INGREDIENTES: " + pizza.getIngredientes());
+				System.out.println("PRECO: "+ pizza.getPreco());
+			}
+			else {
+				System.out.println("PIZZA NÃO ENCONTRADA NOS REGISTROS!");
+				return;
+			}
 		}
 		else {
 			System.out.println("FALHA AO VERIFICAR A EXISTENCIA DA PIZZA, POR FAVOR REINSTALE O SISTEMA!");
