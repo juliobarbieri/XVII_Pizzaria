@@ -29,6 +29,7 @@ public class Sistema {
 			if(opcao.equals("3")){
 				controle.cadastrar_pizza();
 			}
+			System.in.read();
 			
 		}
 	}

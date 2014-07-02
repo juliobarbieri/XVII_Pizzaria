@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import br.com.pizzariadomanolo.entidades.Cliente;
-import br.com.pizzariadomanolo.entidades.Item;
 import br.com.pizzariadomanolo.entidades.Pedido;
 import br.com.pizzariadomanolo.entidades.Pizza;
 
@@ -14,7 +13,6 @@ public class SistemaControle {
 	public Cliente cliente = new Cliente();
 	public Pizza pizza = new Pizza();
 	public Pedido pedido = new Pedido();
-	public Item item = new Item();
 	
 	public void cadastrar_pizza() throws IOException {
 			
@@ -31,11 +29,9 @@ public class SistemaControle {
 		
 		if(pizza.cadastrarPizza()) {
 			System.out.println("NOVA PIZZA INSERIDA COM SUCESSO!");
-			System.in.read();
 		}
 		else {
-			System.out.println("FALHA AO INSERIR NOVA PIZZA, POR FAVOR REINSTALE O SISTEMA!");
-			System.exit(-1);
+			System.out.println("FALHA AO INSERIR NOVA PIZZA!\nCAUSA: NOME DA PIZZA JÁ EXISTENTE.");
 		}
 		
 		pizza.clear();
@@ -63,8 +59,8 @@ public class SistemaControle {
 			}
 		}
 		else {
-			System.out.println("FALHA AO VERIFICAR A EXISTENCIA DO CLIENTE, POR FAVOR REINSTALE O SISTEMA!");
-			System.exit(-1);
+			System.out.println("FALHA AO VERIFICAR A EXISTENCIA DO CLIENTE!");
+			return;
 		}
 		
 		pedido.criaPedido(telefone);		
@@ -79,7 +75,7 @@ public class SistemaControle {
 			if (pizza.buscaPizza()) {
 				if (pizza.getPreco() != null) {
 					System.out.println("INGREDIENTES: " + pizza.getIngredientes());
-					System.out.println("PRECO: "+ pizza.getPreco());
+					System.out.println("PRECO: " + pizza.getPreco());
 				}
 				else {
 					System.out.println("PIZZA NÃO ENCONTRADA NOS REGISTROS!");
@@ -87,17 +83,15 @@ public class SistemaControle {
 				}
 			}
 			else {
-				System.out.println("FALHA AO VERIFICAR A EXISTENCIA DA PIZZA, POR FAVOR REINSTALE O SISTEMA!");
-				System.exit(-1);
+				System.out.println("FALHA AO VERIFICAR A EXISTENCIA DA PIZZA!");
+				return;
 			}
 			
 			System.out.println("QUANTIDADE DESEJADA: ");
 			int quantidade = Integer.parseInt(reader.readLine());
 			
-			//item.criaItem(pizza, quantidade);
 			pedido.adicionarItem(pizza, quantidade);
 			pizza.clear();
-			item.clear();
 			
 			System.out.println("DESEJA INSERIR NOVOS SABORES DE PIZZA? [S/N]");
 			String opcao = reader.readLine();
@@ -112,11 +106,9 @@ public class SistemaControle {
 			
 			if(pedido.cadastrarPedido()) {
 				System.out.println("PEDIDO INSERIDO COM SUCESSO!");
-				System.in.read();
 			}
 			else {
-				System.out.println("FALHA AO ADICIONAR NOVO PEDIDO, POR FAVOR REINSTALE O SISTEMA!");
-				System.exit(-1);
+				System.out.println("FALHA AO ADICIONAR NOVO PEDIDO!");
 			}
 		}
 		
@@ -142,11 +134,9 @@ public class SistemaControle {
 		
 		if(cliente.cadastrarCliente()) {
 			System.out.println("CLIENTE INSERIDO COM SUCESSO!");
-			System.in.read();
 		}
 		else {
-			System.out.println("FALHA AO INSERIR NOVO CLIENTE, POR FAVOR REINSTALE O SISTEMA!");
-			System.exit(-1);
+			System.out.println("FALHA AO INSERIR NOVO CLIENTE!\nCAUSA: TELEFONE JÁ EXISTENTE.");
 		}
 		
 		cliente.clear();
