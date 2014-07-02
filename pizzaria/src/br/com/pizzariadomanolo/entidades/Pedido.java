@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,8 +16,6 @@ public class Pedido {
 	private Integer id;
 	private String telefone;
 	private Timestamp data;
-	private String nomePizza;
-	private Integer quantidade;
 	
 	private List<Item> itens;
 	
@@ -32,37 +31,28 @@ public class Pedido {
 		return data;
 	}
 	
-	public String getNomePizza() {
-		return nomePizza;
-	}
-	
-	public Integer getQuantidade() {
-		return quantidade;
-	}
-	
 	public List<Item> getItens() {
 		return itens;
 	}
 	
-	public void criaPedido(String telefone, String nomePizza, int quantidade) {
+	public void criaPedido(String telefone) {
 		this.telefone = telefone;
-		this.nomePizza = nomePizza;
-		this.quantidade = quantidade;
-
+		
+		this.itens = new ArrayList<Item>();
 	}
 
 	public void clear() {
 		this.telefone = null;
-		this.nomePizza = null;
-		this.quantidade = null;
-
+		this.itens = null;
 	}
 	
-	public void adicionarItem(Item item) {
+	public void adicionarItem(Pizza pizza, int quantidade) {
+		Item item = new Item();
+		item.criaItem(pizza, quantidade);
 		itens.add(item);
 	}
 
-	public boolean novoCadastrarPedido() {
+	public boolean cadastrarPedido() {
 		Connection conexao;
 		PreparedStatement comandoSQL;
 		
@@ -72,7 +62,7 @@ public class Pedido {
 			Date currentTime = new java.util.Date();
 			data = new Timestamp(currentTime.getTime());
 			
-			comandoSQL = conexao.prepareStatement("INSERT INTO PEDIDO VALUES(?, ?)");
+			comandoSQL = conexao.prepareStatement("INSERT INTO PEDIDO(telefone, data_hora) VALUES(?, ?)");
 			comandoSQL.setString(1, telefone);
 			comandoSQL.setTimestamp(2, data);
 			comandoSQL.executeUpdate();
@@ -80,24 +70,7 @@ public class Pedido {
 			cadastraItens();
 			
 		} catch (SQLException e) {
-			return false;
-		}
-		return true;
-	}
-	
-	public boolean cadastrarPedido() {
-		Connection conexao;
-		PreparedStatement comandoSQL;
-		
-		try {
-			conexao = BDConnection.getConnection();
-			comandoSQL = conexao.prepareStatement("INSERT INTO PEDIDO VALUES(?, current_timestamp, ?, ?)");
-			comandoSQL.setString(1, telefone);
-			comandoSQL.setString(2, nomePizza);
-			comandoSQL.setInt(3, quantidade);
-			comandoSQL.executeUpdate();
-			
-		} catch (SQLException e) {
+			e.printStackTrace();
 			return false;
 		}
 		return true;
@@ -110,7 +83,7 @@ public class Pedido {
 		
 		try {
 			conexao = BDConnection.getConnection();
-			comandoSQL = conexao.prepareStatement("SELECT * FROM PEDIDO WHERE telefone = ? and data_hota = ?");
+			comandoSQL = conexao.prepareStatement("SELECT * FROM PEDIDO WHERE telefone = ? and data_hora = ?");
 			comandoSQL.setString(1, telefone);
 			comandoSQL.setTimestamp(2, data);
 			resultado = comandoSQL.executeQuery();
@@ -125,6 +98,7 @@ public class Pedido {
 			}
 			
 		} catch (SQLException e) {
+			e.printStackTrace();
 			return false;
 		}
 		return true;

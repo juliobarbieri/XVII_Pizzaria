@@ -25,8 +25,8 @@ public class Item {
 	}
 	
 	public void criaItem(Pizza pizza, int quantidade) {
-		//this.id = id;
-		this.pizza = pizza;
+		this.pizza = new Pizza();
+		this.pizza.criaPizza(pizza.getNomePizza(), pizza.getIngredientes(), pizza.getPreco().toString());
 		this.quantidade = quantidade;
 
 	}
@@ -44,7 +44,7 @@ public class Item {
 		
 		try {
 			conexao = BDConnection.getConnection();
-			comandoSQL = conexao.prepareStatement("INSERT INTO ITEM VALUES(?, ?, ?)");
+			comandoSQL = conexao.prepareStatement("INSERT INTO ITEM(nome_pizza, quantidade, pedido_id) VALUES(?, ?, ?)");
 			comandoSQL.setString(1, pizza.getNomePizza());
 			comandoSQL.setInt(2, quantidade);
 			comandoSQL.setInt(3, idPedido);
