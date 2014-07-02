@@ -3,7 +3,9 @@ package br.com.pizzariadomanolo.entidades;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +13,7 @@ public class Pedido {
 	
 	private Integer id;
 	private String telefone;
-	private Date data;
+	private Timestamp data;
 	private String nomePizza;
 	private Integer quantidade;
 	
@@ -25,7 +27,7 @@ public class Pedido {
 		return telefone;
 	}
 	
-	public Date getData() {
+	public Timestamp getData() {
 		return data;
 	}
 	
@@ -67,13 +69,16 @@ public class Pedido {
 			Class.forName("org.postgresql.Driver").newInstance();
 			conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/pizza", "postgres", "postgres");
 			
-			for (Item item : itens) {
-				item.cadastrarItem();
-			}
 			
-			comandoSQL = conexao.prepareStatement("INSERT INTO PEDIDO VALUES(?, current_timestamp)");
+			Date currentTime = new java.util.Date();
+			data = new Timestamp(currentTime.getTime());
+			
+			comandoSQL = conexao.prepareStatement("INSERT INTO PEDIDO VALUES(?, ?)");
 			comandoSQL.setString(1, telefone);
+			comandoSQL.setTimestamp(2, data);
 			comandoSQL.executeUpdate();
+			
+			cadastraItens();
 			
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			return false;
@@ -104,5 +109,35 @@ public class Pedido {
 		return true;
 	}
 	
+	private boolean cadastraItens() {
+		Connection conexao;
+		PreparedStatement comandoSQL;
+		ResultSet resultado;
+		
+		try {
+			Class.forName("org.postgresql.Driver").newInstance();
+			conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/pizza", "postgres", "postgres");
+			comandoSQL = conexao.prepareStatement("SELECT * FROM PEDIDO WHERE telefone = ? and data_hota = ?");
+			comandoSQL.setString(1, telefone);
+			comandoSQL.setTimestamp(2, data);
+			resultado = comandoSQL.executeQuery();
+			
+			while (resultado.next()) {
+				id = resultado.getInt("id");
+			}
+			resultado.close();
+			
+			for (Item item : itens) {
+				item.cadastrarItem(id);
+			}
+			
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			return false;
+		} catch (SQLException e) {
+			return false;
+		}
+		return true;
+
+	}
 	
 }

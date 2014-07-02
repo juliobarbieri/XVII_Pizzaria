@@ -37,16 +37,17 @@ public class Item {
 
 	}
 	
-	public boolean cadastrarItem() {
+	public boolean cadastrarItem(Integer idPedido) {
 		Connection conexao;
 		PreparedStatement comandoSQL;
 		
 		try {
 			Class.forName("org.postgresql.Driver").newInstance();
 			conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/pizza", "postgres", "postgres");
-			comandoSQL = conexao.prepareStatement("INSERT INTO ITEM VALUES(?, ?)");
+			comandoSQL = conexao.prepareStatement("INSERT INTO ITEM VALUES(?, ?, ?)");
 			comandoSQL.setString(1, pizza.getNomePizza());
 			comandoSQL.setInt(2, quantidade);
+			comandoSQL.setInt(3, idPedido);
 			comandoSQL.executeUpdate();
 			
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
