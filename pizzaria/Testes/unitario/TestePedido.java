@@ -18,10 +18,8 @@ public class TestePedido {
 	
 	@Test
 	public void criarPedidoTest(){
-		pedido.criaPedido("telefone", "nomePizza", 2);
+		pedido.criaPedido("telefone");
 		assertNotNull(pedido.getTelefone());
-		assertNotNull(pedido.getNomePizza());
-		assertNotNull(pedido.getQuantidade());
 		
 		
 	}
@@ -47,21 +45,9 @@ public class TestePedido {
 	}
 	
 	@Test
-	public void getNomePizza(){
-		assertNull(pedido.getNomePizza());
-	}
-	
-	@Test
-	public void getQuantidade(){
-		assertNull(pedido.getQuantidade());
-	}
-	
-	@Test
 	public void clearTest(){
 		pedido.clear();
 		assertNull(pedido.getTelefone());
-		assertNull(pedido.getNomePizza());
-		assertNull(pedido.getQuantidade());
 	}
 
 }
