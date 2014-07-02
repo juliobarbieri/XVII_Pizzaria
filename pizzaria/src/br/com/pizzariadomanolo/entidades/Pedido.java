@@ -1,13 +1,14 @@
 package br.com.pizzariadomanolo.entidades;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+
+import br.com.pizzariadomanolo.util.BDConnection;
 
 public class Pedido {
 	
@@ -66,9 +67,7 @@ public class Pedido {
 		PreparedStatement comandoSQL;
 		
 		try {
-			Class.forName("org.postgresql.Driver").newInstance();
-			conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/pizza", "postgres", "postgres");
-			
+			conexao = BDConnection.getConnection();
 			
 			Date currentTime = new java.util.Date();
 			data = new Timestamp(currentTime.getTime());
@@ -80,8 +79,6 @@ public class Pedido {
 			
 			cadastraItens();
 			
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			return false;
 		} catch (SQLException e) {
 			return false;
 		}
@@ -93,16 +90,13 @@ public class Pedido {
 		PreparedStatement comandoSQL;
 		
 		try {
-			Class.forName("org.postgresql.Driver").newInstance();
-			conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/pizza", "postgres", "postgres");
+			conexao = BDConnection.getConnection();
 			comandoSQL = conexao.prepareStatement("INSERT INTO PEDIDO VALUES(?, current_timestamp, ?, ?)");
 			comandoSQL.setString(1, telefone);
 			comandoSQL.setString(2, nomePizza);
 			comandoSQL.setInt(3, quantidade);
 			comandoSQL.executeUpdate();
 			
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			return false;
 		} catch (SQLException e) {
 			return false;
 		}
@@ -115,8 +109,7 @@ public class Pedido {
 		ResultSet resultado;
 		
 		try {
-			Class.forName("org.postgresql.Driver").newInstance();
-			conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/pizza", "postgres", "postgres");
+			conexao = BDConnection.getConnection();
 			comandoSQL = conexao.prepareStatement("SELECT * FROM PEDIDO WHERE telefone = ? and data_hota = ?");
 			comandoSQL.setString(1, telefone);
 			comandoSQL.setTimestamp(2, data);
@@ -131,8 +124,6 @@ public class Pedido {
 				item.cadastrarItem(id);
 			}
 			
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			return false;
 		} catch (SQLException e) {
 			return false;
 		}

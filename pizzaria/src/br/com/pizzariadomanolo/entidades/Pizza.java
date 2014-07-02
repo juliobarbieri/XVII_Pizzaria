@@ -1,10 +1,11 @@
 package br.com.pizzariadomanolo.entidades;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import br.com.pizzariadomanolo.util.BDConnection;
 
 
 public class Pizza {
@@ -47,15 +48,12 @@ public class Pizza {
 		
 		String sql = "INSERT INTO CARDAPIO VALUES(?, ?, ?)";
 		try {
-			Class.forName("org.postgresql.Driver").newInstance();
-			conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/pizza", "postgres", "postgres");
+			conexao = BDConnection.getConnection();
 			comandoSQL = conexao.prepareStatement(sql);
 			comandoSQL.setString(1, nomePizza);
 			comandoSQL.setString(2, ingredientes);
 			comandoSQL.setString(3, preco.toString());
 			comandoSQL.executeUpdate();
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			return false;
 		} catch (SQLException e) {
 			return false;
 		}
@@ -68,8 +66,7 @@ public class Pizza {
 		ResultSet resultado;
 		
 		try {
-			Class.forName("org.postgresql.Driver").newInstance();
-			conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/pizza", "postgres", "postgres");
+			conexao = BDConnection.getConnection();
 			comandoSQL = conexao.prepareStatement("SELECT * FROM CARDAPIO WHERE NOME_PIZZA = ?");
 			comandoSQL.setString(1, nomePizza);
 			resultado = comandoSQL.executeQuery();
@@ -78,8 +75,6 @@ public class Pizza {
 				this.preco = Float.parseFloat(resultado.getString("PRECO"));
 			}
 			resultado.close();
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			return false;
 		} catch (SQLException e) {
 			return false;
 		}

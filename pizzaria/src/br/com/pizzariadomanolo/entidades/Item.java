@@ -1,9 +1,10 @@
 package br.com.pizzariadomanolo.entidades;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import br.com.pizzariadomanolo.util.BDConnection;
 
 public class Item {
 	
@@ -42,16 +43,13 @@ public class Item {
 		PreparedStatement comandoSQL;
 		
 		try {
-			Class.forName("org.postgresql.Driver").newInstance();
-			conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/pizza", "postgres", "postgres");
+			conexao = BDConnection.getConnection();
 			comandoSQL = conexao.prepareStatement("INSERT INTO ITEM VALUES(?, ?, ?)");
 			comandoSQL.setString(1, pizza.getNomePizza());
 			comandoSQL.setInt(2, quantidade);
 			comandoSQL.setInt(3, idPedido);
 			comandoSQL.executeUpdate();
 			
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			return false;
 		} catch (SQLException e) {
 			return false;
 		}

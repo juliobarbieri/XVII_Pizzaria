@@ -1,10 +1,11 @@
 package br.com.pizzariadomanolo.entidades;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import br.com.pizzariadomanolo.util.BDConnection;
 
 public class Cliente {
 	
@@ -42,15 +43,12 @@ public class Cliente {
 		
 		String sql = "INSERT INTO CLIENTE VALUES(?, ?, ?)";		
 		try {
-			Class.forName("org.postgresql.Driver").newInstance();
-			conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/pizza", "postgres", "postgres");
+			conexao = BDConnection.getConnection();
 			comandoSQL = conexao.prepareStatement(sql);
 			comandoSQL.setString(1, telefone);
 			comandoSQL.setString(2, nome);
 			comandoSQL.setString(3, endereco);
 			comandoSQL.executeUpdate();
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			return false;
 		} catch (SQLException e) {
 			return false;
 		}
@@ -64,8 +62,7 @@ public class Cliente {
 		ResultSet resultado;
 		
 		try {
-			Class.forName("org.postgresql.Driver").newInstance();
-			conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/pizza", "postgres", "postgres");
+			conexao = BDConnection.getConnection();
 			comandoSQL = conexao.prepareStatement("SELECT * FROM CLIENTE WHERE TELEFONE = ?");
 			comandoSQL.setString(1, telefone);
 			resultado = comandoSQL.executeQuery();
@@ -74,8 +71,6 @@ public class Cliente {
 				endereco = resultado.getString("ENDERECO");
 			}
 			resultado.close();
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			return false;
 		} catch (SQLException e) {
 			return false;
 		}
