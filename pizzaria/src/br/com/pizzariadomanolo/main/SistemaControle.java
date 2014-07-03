@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import br.com.pizzariadomanolo.entidades.Cliente;
 import br.com.pizzariadomanolo.entidades.Pedido;
 import br.com.pizzariadomanolo.entidades.Pizza;
+import br.com.pizzariadomanolo.util.Validator;
 
 public class SistemaControle {
 	
@@ -23,7 +24,17 @@ public class SistemaControle {
 		System.out.println("INGREDIENTES DA NOVA PIZZA: ");
 		ingredientes = reader.readLine();
 		System.out.println("PRECO DA NOVA PIZZA: ");
-		preco = reader.readLine();
+		preco = reader.readLine().replace(",", ".");
+		
+		if (!Validator.isString(ingredientes) || !Validator.isString(nome_pizza)) {
+			System.out.println("NOME DA PIZZA OU INGREDIENTES EM FORMATO INCORRETO!");
+			return;
+		}
+		
+		if (!Validator.isFloat(preco)) {
+			System.out.println("PREÇO EM FORMATO INCORRETO!");
+			return;
+		}
 		
 		pizza.criaPizza(nome_pizza, ingredientes, preco);
 		
@@ -89,7 +100,14 @@ public class SistemaControle {
 			}
 			
 			System.out.println("QUANTIDADE DESEJADA: ");
-			int quantidade = Integer.parseInt(reader.readLine());
+			String qntString = reader.readLine();
+			
+			if (!Validator.isInteger(qntString)) {
+				System.out.println("QUANTIDADE EM FORMATO INCORRETO!");
+				return;
+			}
+			
+			int quantidade = Integer.parseInt(qntString);
 			
 			pedido.adicionarItem(pizza, quantidade);
 			pizza.clear();
@@ -127,6 +145,11 @@ public class SistemaControle {
 		nome = reader.readLine();
 		System.out.println("ENDERECO DO NOVO CLIENTE: ");
 		endereco = reader.readLine();
+		
+		if (!Validator.isString(telefone) || !Validator.isString(nome) || !Validator.isString(endereco)) {
+			System.out.println("TELEFONE, NOME OU ENDERECO EM FORMATO INCORRETO!");
+			return;
+		}
 		
 		cliente.criaCliente(nome, telefone, endereco);
 		
