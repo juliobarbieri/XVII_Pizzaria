@@ -65,7 +65,8 @@ public class SistemaControle {
 		
 		pedido.criaPedido(telefone);		
 		
-		while (true) {
+		String opcao = "S";
+		while (!opcao.equalsIgnoreCase("N")) {
 		
 			System.out.println("PIZZA: ");
 			nome_pizza = reader.readLine();
@@ -94,14 +95,11 @@ public class SistemaControle {
 			pizza.clear();
 			
 			System.out.println("DESEJA INSERIR NOVOS SABORES DE PIZZA? [S/N]");
-			String opcao = reader.readLine();
-			if(opcao.equalsIgnoreCase("N")){
-				break;
-			}
+			opcao = reader.readLine();
 		}
 		
 		System.out.println("CONFIRMA?[S/N]");
-		String opcao = reader.readLine();
+		opcao = reader.readLine();
 		if(opcao.equalsIgnoreCase("S")){
 			
 			if(pedido.cadastrarPedido()) {

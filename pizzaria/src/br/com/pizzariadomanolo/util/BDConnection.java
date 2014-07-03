@@ -11,7 +11,7 @@ public class BDConnection {
 		try {
 			Class.forName("org.postgresql.Driver").newInstance();
 			
-			String url = "jdbc:postgresql://localhost:5432/test";
+			String url = "jdbc:postgresql://localhost:5432/pizza";
 			String user = "postgres";
 			String passwd = "postgres";
 			

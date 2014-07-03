@@ -10,18 +10,21 @@ public class Sistema {
 		SistemaControle controle = new SistemaControle();
 		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		while(true){
+		String opcao = "0";
+		while(!opcao.equals("4")){
 			System.out.println("-----------------------");
 			System.out.println("PIZZARIA DO MANOLO");
 			System.out.println("-----------------------");
 			System.out.println("[1] CADASTRAR NOVO CLIENTE");
 			System.out.println("[2] CADASTRAR NOVO PEDIDO");
 			System.out.println("[3] CADASTRAR NOVA PIZZA");
-			String opcao = reader.readLine();
+			System.out.println("[4] SAIR DA APLICAÇÃO");
+			opcao = reader.readLine();
 			System.out.println(opcao);
 			if(opcao.equals("1")){
 				controle.cadastrar_cliente();
 			}
+			
 			if(opcao.equals("2")){
 				controle.cadastrar_pedido();
 			}
