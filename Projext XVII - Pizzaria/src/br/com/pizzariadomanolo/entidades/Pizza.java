@@ -77,9 +77,12 @@ public class Pizza {
 				this.nomePizza = resultado.getString("NOME_PIZZA");
 				this.ingredientes = resultado.getString("INGREDIENTES");
 				this.preco = Float.parseFloat(resultado.getString("PRECO"));
+				
+				Pizza p = new Pizza();
+				p.criaPizza(this.nomePizza, this.ingredientes, this.preco.toString());
+				
+				pizzas.add(p);
 			}
-			pizzas.add(this);
-			clear();
 			resultado.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
