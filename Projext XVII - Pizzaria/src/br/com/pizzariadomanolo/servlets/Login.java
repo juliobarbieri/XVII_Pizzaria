@@ -44,8 +44,7 @@ public class Login extends HttpServlet {
 		String senha = request.getParameter("senha");
 		
 		Cliente cliente = new Cliente();
-		cliente.criaCliente(null, usuario, null);
-		cliente.validaCliente(senha);
+		cliente.criaCliente(null, usuario, null, null);
 		
 		if (cliente.validaCliente(senha)) {
 			HttpSession session = request.getSession();
@@ -54,8 +53,7 @@ public class Login extends HttpServlet {
 			rs.forward(request, response);
 		}
 		else {
-			out.println("Nome de usuário ou senha incorretos!");
-			//response.sendRedirect("login.jsp");
+			out.println("<font color=red>Nome de usuário ou senha incorretos!</font>");
 			RequestDispatcher rs = request.getRequestDispatcher("login.jsp");
 			rs.include(request, response);
 		}

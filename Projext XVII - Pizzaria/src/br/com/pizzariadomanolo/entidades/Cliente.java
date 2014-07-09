@@ -30,7 +30,23 @@ public class Cliente {
 		return senha;
 	}
 	
-	public void criaCliente(String nome, String telefone, String endereco) {
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+	
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+	
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	
+	public void criaCliente(String nome, String telefone, String endereco, String senha) {
 		this.nome = nome;
 		this.telefone = telefone;
 		this.endereco = endereco;
@@ -46,19 +62,38 @@ public class Cliente {
 		Connection conexao;
 		PreparedStatement comandoSQL;
 		
-		String sql = "INSERT INTO CLIENTE VALUES(?, ?, ?)";		
+		String sql = "INSERT INTO CLIENTE VALUES(?, ?, ?, ?)";		
 		try {
 			conexao = BDConnection.getConnection();
 			comandoSQL = conexao.prepareStatement(sql);
 			comandoSQL.setString(1, telefone);
 			comandoSQL.setString(2, nome);
 			comandoSQL.setString(3, endereco);
+			comandoSQL.setString(4, senha);
 			comandoSQL.executeUpdate();
 		} catch (SQLException e) {
 			return false;
 		}
 		return true;
 
+	}
+	
+	public boolean verificaExistenciaCliente(String telefone) {
+		Connection conexao;
+		PreparedStatement comandoSQL;
+		ResultSet resultado;
+		
+		try {
+			conexao = BDConnection.getConnection();
+			comandoSQL = conexao.prepareStatement("SELECT * FROM CLIENTE WHERE TELEFONE = ?");
+			comandoSQL.setString(1, telefone);
+			resultado = comandoSQL.executeQuery();
+			return resultado.next();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	public boolean validaCliente(String senha) {

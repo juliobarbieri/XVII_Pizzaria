@@ -52,6 +52,7 @@
 			if (cliente == null) {
 		%>
 			<a href="login.jsp" >Login</a>
+			<a href="cadastro.jsp" >Cadastro</a>
 		<%	
 			} else { 
 		%>
