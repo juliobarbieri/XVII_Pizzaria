@@ -55,6 +55,7 @@ public class Login extends HttpServlet {
 		}
 		else {
 			out.println("Nome de usuário ou senha incorretos!");
+			//response.sendRedirect("login.jsp");
 			RequestDispatcher rs = request.getRequestDispatcher("login.jsp");
 			rs.include(request, response);
 		}

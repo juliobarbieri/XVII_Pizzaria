@@ -82,7 +82,7 @@ public class Cliente {
 			return false;
 		}
 		
-		if (this.senha.equals(senha)) {
+		if (this.senha != null && this.senha.equals(senha)) {
 			return true;
 		}
 		else {			

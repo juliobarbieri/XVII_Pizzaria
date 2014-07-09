@@ -4,13 +4,27 @@
 	</head>
 	<body>
 		<%@ page import = "br.com.pizzariadomanolo.entidades.Pizza" %>
+		<%@ page import = "br.com.pizzariadomanolo.entidades.Cliente" %>
 		<%@ page import = "java.util.ArrayList" %>
+		
+		<% 	Cliente cliente = (Cliente) session.getAttribute("cliente");
+			String nome;
+			
+			if (cliente == null) {
+				nome = "cliente";
+			}
+			else {
+				nome = cliente.getNome();
+			}
+		%>
 	
 		<h1>Pizzaria do Manolo</h1>
 		
-		Bem-vindo cliente!<br>
+		Bem-vindo <%= nome %>!<br>
 		O que deseja?<br>
 	 	<br>
+	 	
+	 	<h2>Cardápio</h2>
 		
 		<table border="1">
 			<tr>
@@ -33,6 +47,18 @@
 			}
 		%>
 		</table>
+		
+		<%
+			if (cliente == null) {
+		%>
+			<a href="login.jsp" >Login</a>
+		<%	
+			} else { 
+		%>
+			<a href="index.jsp" onclick="window.location=<%session.invalidate();%>'">Logout</a>
+		<%
+			}
+		%>
 		
 		<form action="cadastro.html">
 			<input type="submit" value="Pizzas">
