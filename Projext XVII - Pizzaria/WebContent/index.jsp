@@ -24,6 +24,20 @@
 		O que deseja?<br>
 	 	<br>
 	 	
+	 	<%
+			if (cliente == null) {
+		%>
+			<a href="login.jsp" >Login</a>
+			<a href="cadastro.jsp" >Cadastro</a>
+		<%	
+			} else { 
+		%>
+			<a href="pedido.jsp" >Pedido</a>
+			<a href="index.jsp" onclick="window.location=<%session.invalidate();%>'">Logout</a>
+		<%
+			}
+		%>
+	 	
 	 	<h2>Cardápio</h2>
 		
 		<table border="1">
@@ -48,21 +62,5 @@
 		%>
 		</table>
 		
-		<%
-			if (cliente == null) {
-		%>
-			<a href="login.jsp" >Login</a>
-			<a href="cadastro.jsp" >Cadastro</a>
-		<%	
-			} else { 
-		%>
-			<a href="index.jsp" onclick="window.location=<%session.invalidate();%>'">Logout</a>
-		<%
-			}
-		%>
-		
-		<form action="cadastro.html">
-			<input type="submit" value="Pizzas">
-		</form>
 	</body>
 </html>

@@ -20,8 +20,12 @@ public class Item {
 		return quantidade;
 	}
 	
-	public double getValor(){
-		return pizza.getPreco();
+	public float getTotal() {
+		return quantidade * pizza.getPreco();
+	}
+	
+	public Pizza getPizza(){
+		return pizza;
 	}
 	
 	public void criaItem(Pizza pizza, int quantidade) {

@@ -49,8 +49,7 @@ public class Login extends HttpServlet {
 		if (cliente.validaCliente(senha)) {
 			HttpSession session = request.getSession();
 			session.setAttribute("cliente", cliente);
-			RequestDispatcher rs = request.getRequestDispatcher("index.jsp");
-			rs.forward(request, response);
+			response.sendRedirect("index.jsp");
 		}
 		else {
 			out.println("<font color=red>Nome de usuário ou senha incorretos!</font>");
