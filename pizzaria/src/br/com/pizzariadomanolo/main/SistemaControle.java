@@ -4,13 +4,18 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import br.com.pizzariadomanolo.DAO.POSTGRES.ClienteDAOPostgres;
+import br.com.pizzariadomanolo.DAO.POSTGRES.PedidoDAOPostgres;
+import br.com.pizzariadomanolo.DAO.POSTGRES.PizzaDAOPostgres;
 import br.com.pizzariadomanolo.entidades.Cliente;
 import br.com.pizzariadomanolo.entidades.Pedido;
 import br.com.pizzariadomanolo.entidades.Pizza;
 import br.com.pizzariadomanolo.util.Validator;
 
 public class SistemaControle {
-	
+	private ClienteDAOPostgres cliDAO = new ClienteDAOPostgres();
+	private PedidoDAOPostgres pedDAO = new PedidoDAOPostgres();
+	private PizzaDAOPostgres pizDAO = new PizzaDAOPostgres();
 	public Cliente cliente = new Cliente();
 	public Pizza pizza = new Pizza();
 	public Pedido pedido = new Pedido();
@@ -32,17 +37,17 @@ public class SistemaControle {
 		}
 		
 		if (!Validator.isFloat(preco)) {
-			System.out.println("PREÇO EM FORMATO INCORRETO!");
+			System.out.println("PREÃ‡O EM FORMATO INCORRETO!");
 			return;
 		}
 		
 		pizza.criaPizza(nome_pizza, ingredientes, preco);
 		
-		if(pizza.cadastrarPizza()) {
+		if(pizDAO.cadastrarPizza(pizza)) {
 			System.out.println("NOVA PIZZA INSERIDA COM SUCESSO!");
 		}
 		else {
-			System.out.println("FALHA AO INSERIR NOVA PIZZA!\nCAUSA: NOME DA PIZZA JÁ EXISTENTE.");
+			System.out.println("FALHA AO INSERIR NOVA PIZZA!\nCAUSA: NOME DA PIZZA JÃ� EXISTENTE.");
 		}
 		
 		pizza.clear();
@@ -59,13 +64,13 @@ public class SistemaControle {
 		
 		cliente.criaCliente(null, telefone, null);
 		
-		if(cliente.buscaCliente()) {
+		if(cliDAO.buscaCliente(cliente)) {
 			if (cliente.getNome() != null) {
 				System.out.println("NOME: " + cliente.getNome());
 				System.out.println("ENDERECO: " + cliente.getEndereco());
 			}
 			else {
-				System.out.println("CLIENTE NÃO ENCONTRADO NOS REGISTROS!");
+				System.out.println("CLIENTE NÃƒO ENCONTRADO NOS REGISTROS!");
 				return;
 			}
 		}
@@ -84,13 +89,13 @@ public class SistemaControle {
 			
 			pizza.setNomePizza(nome_pizza);
 		
-			if (pizza.buscaPizza()) {
+			if (pizDAO.buscaPizza(pizza)) {
 				if (pizza.getPreco() != null) {
 					System.out.println("INGREDIENTES: " + pizza.getIngredientes());
 					System.out.println("PRECO: " + pizza.getPreco());
 				}
 				else {
-					System.out.println("PIZZA NÃO ENCONTRADA NOS REGISTROS!");
+					System.out.println("PIZZA NÃƒO ENCONTRADA NOS REGISTROS!");
 					return;
 				}
 			}
@@ -120,7 +125,7 @@ public class SistemaControle {
 		opcao = reader.readLine();
 		if(opcao.equalsIgnoreCase("S")){
 			
-			if(pedido.cadastrarPedido()) {
+			if(pedDAO.cadastrarPedido(pedido)) {
 				System.out.println("PEDIDO INSERIDO COM SUCESSO!");
 			}
 			else {
@@ -153,11 +158,11 @@ public class SistemaControle {
 		
 		cliente.criaCliente(nome, telefone, endereco);
 		
-		if(cliente.cadastrarCliente()) {
+		if(cliDAO.cadastrarCliente(cliente)) {
 			System.out.println("CLIENTE INSERIDO COM SUCESSO!");
 		}
 		else {
-			System.out.println("FALHA AO INSERIR NOVO CLIENTE!\nCAUSA: TELEFONE JÁ EXISTENTE.");
+			System.out.println("FALHA AO INSERIR NOVO CLIENTE!\nCAUSA: TELEFONE JÃ� EXISTENTE.");
 		}
 		
 		cliente.clear();
