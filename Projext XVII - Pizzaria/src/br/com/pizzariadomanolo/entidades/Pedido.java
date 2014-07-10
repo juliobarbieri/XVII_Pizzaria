@@ -1,15 +1,9 @@
 package br.com.pizzariadomanolo.entidades;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import br.com.pizzariadomanolo.util.BDConnection;
 
 public class Pedido {
 	
@@ -52,57 +46,14 @@ public class Pedido {
 		itens.add(item);
 	}
 
-	public boolean cadastrarPedido() {
-		Connection conexao;
-		PreparedStatement comandoSQL;
-		
-		try {
-			conexao = BDConnection.getConnection();
-			
-			Date currentTime = new java.util.Date();
-			data = new Timestamp(currentTime.getTime());
-			
-			comandoSQL = conexao.prepareStatement("INSERT INTO PEDIDO(telefone, data_hora) VALUES(?, ?)");
-			comandoSQL.setString(1, telefone);
-			comandoSQL.setTimestamp(2, data);
-			comandoSQL.executeUpdate();
-			
-			cadastraItens();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
+	public void setData(Timestamp data){
+		this.data = data;
 	}
 	
-	private boolean cadastraItens() {
-		Connection conexao;
-		PreparedStatement comandoSQL;
-		ResultSet resultado;
-		
-		try {
-			conexao = BDConnection.getConnection();
-			comandoSQL = conexao.prepareStatement("SELECT * FROM PEDIDO WHERE telefone = ? and data_hora = ?");
-			comandoSQL.setString(1, telefone);
-			comandoSQL.setTimestamp(2, data);
-			resultado = comandoSQL.executeQuery();
-			
-			while (resultado.next()) {
-				id = resultado.getInt("id");
-			}
-			resultado.close();
-			
-			for (Item item : itens) {
-				item.cadastrarItem(id);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-
+	public void setId(int id){
+		this.id = id;
 	}
+	
+	
 	
 }

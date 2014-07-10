@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.pizzariadomanolo.entidades.Cliente;
+import br.com.pizzariamanolo.DAO.POSTGRES.ClienteDAOPostgres;
 
 /**
  * Servlet implementation class Cadastro
@@ -39,7 +40,7 @@ public class Cadastro extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		
+		ClienteDAOPostgres cadastro = new ClienteDAOPostgres();
 		String telefone = request.getParameter("telefone");
 		String nome = request.getParameter("nome");
 		String endereco = request.getParameter("endereco");
@@ -47,18 +48,19 @@ public class Cadastro extends HttpServlet {
 		String confirmarSenha = request.getParameter("confirmarSenha");
 		
 		Cliente cliente = new Cliente();
+		cliente.setTelefone(telefone);
 		if ("".equals(telefone.trim()) || "".equals(nome.trim()) || "".equals(endereco.trim())) {
-			out.println("<font color=red>Telefone, Nome ou Endere√ßo vazios!</font>");
+			out.println("<font color=red>Telefone, Nome ou EndereÁo vazios!</font>");
 			RequestDispatcher rs = request.getRequestDispatcher("cadastro.jsp");
 			rs.include(request, response);
 		}
 		else if (("".equals(senha) && "".equals(confirmarSenha)) || !senha.equals(confirmarSenha)) {
-			out.println("<font color=red>Senhas n√£o conferem!</font>");
+			out.println("<font color=red>Senhas n„o conferem!</font>");
 			RequestDispatcher rs = request.getRequestDispatcher("cadastro.jsp");
 			rs.include(request, response);
 		}
-		else if (cliente.verificaExistenciaCliente(telefone)) {
-			out.println("<font color=red>Telefone j√° cadastrado!</font>");
+		else if (cadastro.verificaExistenciaCliente(telefone)) {
+			out.println("<font color=red>Telefone j· cadastrado!</font>");
 			RequestDispatcher rs = request.getRequestDispatcher("cadastro.jsp");
 			rs.include(request, response);
 		}
@@ -68,7 +70,7 @@ public class Cadastro extends HttpServlet {
 			cliente.setSenha(senha);
 			cliente.setTelefone(telefone);
 			
-			cliente.cadastrarCliente();
+			cadastro.cadastrarCliente(cliente);
 			
 			response.sendRedirect("index.jsp");
 			//RequestDispatcher rs = request.getRequestDispatcher("index.jsp");

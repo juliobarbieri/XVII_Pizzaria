@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import br.com.pizzariadomanolo.entidades.Cliente;
+import br.com.pizzariamanolo.DAO.POSTGRES.ClienteDAOPostgres;
 
 /**
  * Servlet implementation class Login
@@ -39,6 +40,7 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
+		ClienteDAOPostgres cadastro = new ClienteDAOPostgres();
 		
 		String usuario = request.getParameter("usuario");
 		String senha = request.getParameter("senha");
@@ -46,13 +48,13 @@ public class Login extends HttpServlet {
 		Cliente cliente = new Cliente();
 		cliente.criaCliente(null, usuario, null, null);
 		
-		if (cliente.validaCliente(senha)) {
+		if (cadastro.validaCliente(cliente, senha)) {
 			HttpSession session = request.getSession();
 			session.setAttribute("cliente", cliente);
 			response.sendRedirect("index.jsp");
 		}
 		else {
-			out.println("<font color=red>Nome de usu√°rio ou senha incorretos!</font>");
+			out.println("<font color=red>Nome de usu·rio ou senha incorretos!</font>");
 			RequestDispatcher rs = request.getRequestDispatcher("login.jsp");
 			rs.include(request, response);
 		}

@@ -1,11 +1,5 @@
 package br.com.pizzariadomanolo.entidades;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
-import br.com.pizzariadomanolo.util.BDConnection;
-
 public class Item {
 	
 	private Integer id;
@@ -42,23 +36,6 @@ public class Item {
 
 	}
 	
-	public boolean cadastrarItem(Integer idPedido) {
-		Connection conexao;
-		PreparedStatement comandoSQL;
-		
-		try {
-			conexao = BDConnection.getConnection();
-			comandoSQL = conexao.prepareStatement("INSERT INTO ITEM(nome_pizza, quantidade, pedido_id) VALUES(?, ?, ?)");
-			comandoSQL.setString(1, pizza.getNomePizza());
-			comandoSQL.setInt(2, quantidade);
-			comandoSQL.setInt(3, idPedido);
-			comandoSQL.executeUpdate();
-			
-		} catch (SQLException e) {
-			return false;
-		}
-		return true;
-	}
-	
+
 
 }
