@@ -20,7 +20,7 @@ public class ClienteDAOPostgres implements ClienteDAO {
 			conexao = BDConnection.getConnection();
 			comandoSQL = conexao.prepareStatement(sql);
 			comandoSQL.setString(1, cliente.getTelefone());
-			comandoSQL.setString(2, cliente.getTelefone());
+			comandoSQL.setString(2, cliente.getNome());
 			comandoSQL.setString(3, cliente.getEndereco());
 			comandoSQL.executeUpdate();
 		} catch (SQLException e) {
@@ -53,10 +53,9 @@ public class ClienteDAOPostgres implements ClienteDAO {
 			e.printStackTrace();
 			return false;
 		}
-		
-
-			cliente.criaCliente(nome, cliente.getTelefone(), endereco);
-			return true;
+			
+		cliente.criaCliente(nome, cliente.getTelefone(), endereco);	
+		return true;
 		
 	}
 

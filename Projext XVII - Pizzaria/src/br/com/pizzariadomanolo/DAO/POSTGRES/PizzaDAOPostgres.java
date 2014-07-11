@@ -1,4 +1,4 @@
-package br.com.pizzariamanolo.DAO.POSTGRES;
+package br.com.pizzariadomanolo.DAO.POSTGRES;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

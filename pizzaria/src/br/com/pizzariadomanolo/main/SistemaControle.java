@@ -13,12 +13,21 @@ import br.com.pizzariadomanolo.entidades.Pizza;
 import br.com.pizzariadomanolo.util.Validator;
 
 public class SistemaControle {
-	private ClienteDAOPostgres cliDAO = new ClienteDAOPostgres();
-	private PedidoDAOPostgres pedDAO = new PedidoDAOPostgres();
-	private PizzaDAOPostgres pizDAO = new PizzaDAOPostgres();
-	public Cliente cliente = new Cliente();
-	public Pizza pizza = new Pizza();
-	public Pedido pedido = new Pedido();
+	private ClienteDAOPostgres cliDAO;
+	private PedidoDAOPostgres pedDAO;
+	private PizzaDAOPostgres pizDAO;
+	public Cliente cliente;
+	public Pizza pizza;
+	public Pedido pedido;
+	
+	public SistemaControle() {
+		cliDAO = new ClienteDAOPostgres();
+		pedDAO = new PedidoDAOPostgres();
+		pizDAO = new PizzaDAOPostgres();
+		cliente = new Cliente();
+		pizza = new Pizza();
+		pedido = new Pedido();
+	}
 	
 	public void cadastrar_pizza() throws IOException {
 			
@@ -47,7 +56,7 @@ public class SistemaControle {
 			System.out.println("NOVA PIZZA INSERIDA COM SUCESSO!");
 		}
 		else {
-			System.out.println("FALHA AO INSERIR NOVA PIZZA!\nCAUSA: NOME DA PIZZA JÃ� EXISTENTE.");
+			System.out.println("FALHA AO INSERIR NOVA PIZZA!\nCAUSA: NOME DA PIZZA JÁ EXISTENTE.");
 		}
 		
 		pizza.clear();
@@ -62,7 +71,7 @@ public class SistemaControle {
 		System.out.println("TELEFONE DO CLIENTE: ");
 		telefone = reader.readLine();
 		
-		cliente.criaCliente(null, telefone, null);
+		cliente.setTelefone(telefone);
 		
 		if(cliDAO.buscaCliente(cliente)) {
 			if (cliente.getNome() != null) {
@@ -162,7 +171,7 @@ public class SistemaControle {
 			System.out.println("CLIENTE INSERIDO COM SUCESSO!");
 		}
 		else {
-			System.out.println("FALHA AO INSERIR NOVO CLIENTE!\nCAUSA: TELEFONE JÃ� EXISTENTE.");
+			System.out.println("FALHA AO INSERIR NOVO CLIENTE!\nCAUSA: TELEFONE JÁ EXISTENTE.");
 		}
 		
 		cliente.clear();

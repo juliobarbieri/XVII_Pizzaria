@@ -1,12 +1,12 @@
-package br.com.pizzariamanolo.DAO.POSTGRES;
+package br.com.pizzariadomanolo.DAO.POSTGRES;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import br.com.pizzariadomanolo.DAO.ItemDAO;
 import br.com.pizzariadomanolo.entidades.Item;
 import br.com.pizzariadomanolo.util.BDConnection;
-import br.com.pizzariamanolo.DAO.ItemDAO;
 
 public class ItemDAOPostgres implements ItemDAO {
 

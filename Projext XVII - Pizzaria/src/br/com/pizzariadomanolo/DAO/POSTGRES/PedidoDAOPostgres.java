@@ -1,4 +1,4 @@
-package br.com.pizzariamanolo.DAO.POSTGRES;
+package br.com.pizzariadomanolo.DAO.POSTGRES;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,10 +8,10 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import br.com.pizzariadomanolo.DAO.PedidoDAO;
 import br.com.pizzariadomanolo.entidades.Item;
 import br.com.pizzariadomanolo.entidades.Pedido;
 import br.com.pizzariadomanolo.util.BDConnection;
-import br.com.pizzariamanolo.DAO.PedidoDAO;
 
 public class PedidoDAOPostgres implements PedidoDAO {
 

@@ -1,13 +1,13 @@
-package br.com.pizzariamanolo.DAO.POSTGRES;
+package br.com.pizzariadomanolo.DAO.POSTGRES;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import br.com.pizzariadomanolo.DAO.ClienteDAO;
 import br.com.pizzariadomanolo.entidades.Cliente;
 import br.com.pizzariadomanolo.util.BDConnection;
-import br.com.pizzariamanolo.DAO.ClienteDAO;
 
 public class ClienteDAOPostgres implements ClienteDAO {
 

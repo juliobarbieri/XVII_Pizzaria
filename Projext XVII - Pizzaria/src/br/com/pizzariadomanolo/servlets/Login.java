@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import br.com.pizzariadomanolo.DAO.POSTGRES.ClienteDAOPostgres;
 import br.com.pizzariadomanolo.entidades.Cliente;
-import br.com.pizzariamanolo.DAO.POSTGRES.ClienteDAOPostgres;
 
 /**
  * Servlet implementation class Login
@@ -54,7 +54,7 @@ public class Login extends HttpServlet {
 			response.sendRedirect("index.jsp");
 		}
 		else {
-			out.println("<font color=red>Nome de usuário ou senha incorretos!</font>");
+			out.println("<font color=red>Nome de usuï¿½rio ou senha incorretos!</font>");
 			RequestDispatcher rs = request.getRequestDispatcher("login.jsp");
 			rs.include(request, response);
 		}

@@ -2,7 +2,7 @@ package br.com.pizzariadomanolo.entidades;
 
 import java.util.ArrayList;
 
-import br.com.pizzariamanolo.DAO.POSTGRES.PizzaDAOPostgres;
+import br.com.pizzariadomanolo.DAO.POSTGRES.PizzaDAOPostgres;
 
 
 public class Pizza {

@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 
 public class Sistema {
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		SistemaControle controle = new SistemaControle();
 		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -19,21 +19,26 @@ public class Sistema {
 			System.out.println("[2] CADASTRAR NOVO PEDIDO");
 			System.out.println("[3] CADASTRAR NOVA PIZZA");
 			System.out.println("[4] SAIR DA APLICAÇÃO");
-			opcao = reader.readLine();
-			System.out.println(opcao);
-			if(opcao.equals("1")){
-				controle.cadastrar_cliente();
-			}
 			
-			if(opcao.equals("2")){
-				controle.cadastrar_pedido();
+			try {
+				opcao = reader.readLine();
+				System.out.println(opcao);
+				if(opcao.equals("1")){
+					controle.cadastrar_cliente();
+				}
+				
+				if(opcao.equals("2")){
+					controle.cadastrar_pedido();
+				}
+				
+				if(opcao.equals("3")){
+					controle.cadastrar_pizza();
+				}
+				reader = new BufferedReader(new InputStreamReader(System.in));
+				
+			} catch (IOException e) {
+				System.out.println("Erro ao capturar dígitos do teclado!");
 			}
-			
-			if(opcao.equals("3")){
-				controle.cadastrar_pizza();
-			}
-			reader = new BufferedReader(new InputStreamReader(System.in));
-			
 		}
 	}
 

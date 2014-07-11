@@ -1,4 +1,4 @@
-package br.com.pizzariamanolo.DAO;
+package br.com.pizzariadomanolo.DAO;
 
 import br.com.pizzariadomanolo.entidades.Cliente;
 

@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.pizzariadomanolo.DAO.POSTGRES.ClienteDAOPostgres;
 import br.com.pizzariadomanolo.entidades.Cliente;
-import br.com.pizzariamanolo.DAO.POSTGRES.ClienteDAOPostgres;
 
 /**
  * Servlet implementation class Cadastro
@@ -50,17 +50,17 @@ public class Cadastro extends HttpServlet {
 		Cliente cliente = new Cliente();
 		cliente.setTelefone(telefone);
 		if ("".equals(telefone.trim()) || "".equals(nome.trim()) || "".equals(endereco.trim())) {
-			out.println("<font color=red>Telefone, Nome ou EndereÁo vazios!</font>");
+			out.println("<font color=red>Telefone, Nome ou Endere√ßo vazios!</font>");
 			RequestDispatcher rs = request.getRequestDispatcher("cadastro.jsp");
 			rs.include(request, response);
 		}
 		else if (("".equals(senha) && "".equals(confirmarSenha)) || !senha.equals(confirmarSenha)) {
-			out.println("<font color=red>Senhas n„o conferem!</font>");
+			out.println("<font color=red>Senhas n√£o conferem!</font>");
 			RequestDispatcher rs = request.getRequestDispatcher("cadastro.jsp");
 			rs.include(request, response);
 		}
 		else if (cadastro.verificaExistenciaCliente(telefone)) {
-			out.println("<font color=red>Telefone j· cadastrado!</font>");
+			out.println("<font color=red>Telefone j√° cadastrado!</font>");
 			RequestDispatcher rs = request.getRequestDispatcher("cadastro.jsp");
 			rs.include(request, response);
 		}
