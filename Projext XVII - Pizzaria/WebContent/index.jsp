@@ -8,6 +8,7 @@
 		<%@ page import = "java.util.ArrayList" %>
 		
 		<% 	Cliente cliente = (Cliente) session.getAttribute("cliente");
+		
 			String nome;
 			
 			if (cliente == null) {
@@ -15,6 +16,7 @@
 			}
 			else {
 				nome = cliente.getNome();
+				session.setAttribute("cliente", cliente);
 			}
 		%>
 	
@@ -33,7 +35,7 @@
 			} else { 
 		%>
 			<a href="pedido.jsp" >Pedido</a>
-			<a href="index.jsp" onclick="window.location=<%session.invalidate();%>'">Logout</a>
+			<!--  <a href="index.jsp" onclick="window.location=<%session.invalidate();%>'">Logout</a> -->
 		<%
 			}
 		%>

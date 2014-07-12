@@ -1,8 +1,16 @@
 <html>
 	<head>
 		<title>Pedido</title>
+		
+		<script type="text/javascript">
+			function abrePopup()
+			{
+				window.open("addPizza.jsp", "nome", "width='200', height='200', scrollbars='no', location=no, directories=no, status=no, menubar=no, toolbar=no, resizable=no");
+			}
+		</script>
 	</head>
 	<body>
+		<%@ page import = "br.com.pizzariadomanolo.entidades.Pedido" %>
 		<%@ page import = "br.com.pizzariadomanolo.entidades.Item" %>
 		<%@ page import = "br.com.pizzariadomanolo.entidades.Cliente" %>
 		<%@ page import = "java.util.ArrayList" %>
@@ -15,9 +23,17 @@
 				<th>Remover</th>
 			</tr>
 		<%
-			ArrayList<Item> itens = new ArrayList<Item>();
 			
-			for (Item i : itens) { 
+			Cliente cliente = (Cliente) session.getAttribute("cliente");
+			Pedido pedido = (Pedido) session.getAttribute("pedido");
+			
+			if (pedido == null) {
+				pedido = new Pedido();
+				out.println(cliente.getTelefone());
+				pedido.criaPedido(cliente.getTelefone());
+			}
+			
+			for (Item i : pedido.getItens()) { 
 		%>
 			<tr>
 				<td> <%= i.getPizza().getNomePizza() %> </td>
@@ -29,8 +45,8 @@
 			}
 		%>
 		</table>
-		
-		<a href="addPizza.jsp" target="blank">Adicionar Pizzas</a>
+     
+		<a href="javascript:abrePopup();" >Adicionar Pizzas</a>
 		
 	</body>
 </html>
