@@ -35,7 +35,6 @@
 			} else { 
 		%>
 			<a href="pedido.jsp" >Pedido</a>
-			<!--  <a href="index.jsp" onclick="window.location=<%session.invalidate();%>'">Logout</a> -->
 		<%
 			}
 		%>

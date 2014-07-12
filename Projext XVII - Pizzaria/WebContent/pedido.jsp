@@ -29,7 +29,6 @@
 			
 			if (pedido == null) {
 				pedido = new Pedido();
-				out.println(cliente.getTelefone());
 				pedido.criaPedido(cliente.getTelefone());
 			}
 			

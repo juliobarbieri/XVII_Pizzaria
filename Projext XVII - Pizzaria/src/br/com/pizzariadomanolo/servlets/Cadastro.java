@@ -73,8 +73,6 @@ public class Cadastro extends HttpServlet {
 			cadastro.cadastrarCliente(cliente);
 			
 			response.sendRedirect("index.jsp");
-			//RequestDispatcher rs = request.getRequestDispatcher("index.jsp");
-			//rs.forward(request, response);
 		}
 	}
 

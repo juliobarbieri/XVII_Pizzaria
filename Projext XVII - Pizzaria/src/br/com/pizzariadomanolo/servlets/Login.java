@@ -55,10 +55,7 @@ public class Login extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("cliente", cliente);
 			session.setAttribute("pedido", pedido);
-			//session.setMaxInactiveInterval(30*60);
 			response.sendRedirect("index.jsp");
-			//RequestDispatcher rs = request.getRequestDispatcher("index.jsp");
-			//rs.include(request, response);
 		}
 		else {
 			RequestDispatcher rs = request.getRequestDispatcher("login.jsp");
