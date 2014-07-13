@@ -7,10 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import br.com.pizzariadomanolo.DAO.PizzaDAO;
 import br.com.pizzariadomanolo.entidades.Pizza;
 import br.com.pizzariadomanolo.util.BDConnection;
 
-public class PizzaDAOPostgres {
+public class PizzaDAOPostgres implements PizzaDAO {
 	
 	public boolean cadastrarPizza(Pizza pizza) {
 		Connection conexao;
