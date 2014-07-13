@@ -38,7 +38,13 @@
 				<td> <%= i.getPizza().getNomePizza() %> </td>
 				<td> <%= i.getQuantidade() %> </td>
 				<td> R$ <%= i.getTotal() %> </td>
-				<td><a>Remover</a></td>
+				<td>
+					<form method="post"	action="Remove">
+						<input type="hidden" name="pizza" value="<%= i.getPizza().getNomePizza() %>">
+						<input type="hidden" name="qnt" value="<%= i.getQuantidade() %>">
+						<input type="submit" value="Remover">
+					</form>
+				</td>
 			</tr>
 		<%		
 			}

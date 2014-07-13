@@ -41,7 +41,7 @@
 			<br>
 			Entre com a quantidade:<br>
 			<input type="text" name="quantidade" onkeypress="return onlyNumbers(event);" /><br>
-			<input type="submit" value="AddPizza">
+			<input type="submit" value="Adicionar">
 		</form>
 		
 		<body onunload="window.opener.location.reload()">

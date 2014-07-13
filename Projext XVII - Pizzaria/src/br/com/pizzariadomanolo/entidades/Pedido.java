@@ -45,6 +45,20 @@ public class Pedido {
 		item.criaItem(pizza, quantidade);
 		itens.add(item);
 	}
+	
+	public void removerItem(String nomePizza, int quantidade) {
+		Item itemParaExluir = null;
+		boolean excluir = false;
+		for (Item item : itens) {
+			if (item.getPizza().getNomePizza().equals(nomePizza) && (item.getQuantidade() == quantidade)) {
+				itemParaExluir = item;
+				excluir = true;
+			}
+		}
+		if (excluir == true) {
+			itens.remove(itemParaExluir);
+		}
+	}
 
 	public void setData(Timestamp data){
 		this.data = data;
