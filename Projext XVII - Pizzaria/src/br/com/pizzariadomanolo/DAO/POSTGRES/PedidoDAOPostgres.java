@@ -25,9 +25,11 @@ public class PedidoDAOPostgres implements PedidoDAO {
 			Date currentTime = new java.util.Date();
 			pedido.setData(new Timestamp(currentTime.getTime()));
 			
-			comandoSQL = conexao.prepareStatement("INSERT INTO PEDIDO(telefone, data_hora) VALUES(?, ?)");
+			comandoSQL = conexao.prepareStatement("INSERT INTO PEDIDO(telefone, data_hora, forma_pagamento, troco) VALUES(?, ?, ?, ?)");
 			comandoSQL.setString(1, pedido.getTelefone());
 			comandoSQL.setTimestamp(2, pedido.getData());
+			comandoSQL.setString(3, pedido.getFormaPagamento());
+			comandoSQL.setFloat(4, pedido.getTroco());
 			comandoSQL.executeUpdate();
 			
 			cadastraItens(pedido);

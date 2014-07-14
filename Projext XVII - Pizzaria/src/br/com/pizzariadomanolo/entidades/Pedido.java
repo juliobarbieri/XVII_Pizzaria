@@ -10,6 +10,8 @@ public class Pedido {
 	private Integer id;
 	private String telefone;
 	private Timestamp data;
+	private String formaPagamento;
+	private Float troco;
 	
 	private List<Item> itens;
 	
@@ -27,6 +29,30 @@ public class Pedido {
 	
 	public List<Item> getItens() {
 		return itens;
+	}
+	
+	public void setData(Timestamp data){
+		this.data = data;
+	}
+	
+	public void setId(int id){
+		this.id = id;
+	}
+	
+	public String getFormaPagamento() {
+		return formaPagamento;
+	}
+	
+	public void setFormaPagamento(String formaPagamento) {
+		this.formaPagamento = formaPagamento;
+	}
+	
+	public Float getTroco() {
+		return troco;
+	}
+	
+	public void setTroco(Float troco) {
+		this.troco = troco;
 	}
 	
 	public void criaPedido(String telefone) {
@@ -60,13 +86,7 @@ public class Pedido {
 		}
 	}
 
-	public void setData(Timestamp data){
-		this.data = data;
-	}
-	
-	public void setId(int id){
-		this.id = id;
-	}
+
 	
 	
 	

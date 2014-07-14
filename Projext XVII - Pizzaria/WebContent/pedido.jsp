@@ -52,6 +52,8 @@
 		</table>
      
 		<a href="javascript:abrePopup();" >Adicionar Pizzas</a>
+		<br><br>
+		<a href="fecharPedido.jsp" >Fechar pedido</a>
 		
 	</body>
 </html>

@@ -5,6 +5,8 @@ create table pedido (
 	id serial,
 	telefone varchar, 
 	data_hora timestamp, 
+	forma_pagamento varchar,
+	troco varchar,
 	constraint pk_pedido primary key (id), 
 	constraint fk_cliente foreign key (telefone) references cliente (telefone));
 
