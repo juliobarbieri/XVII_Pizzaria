@@ -1,4 +1,4 @@
-<%@page import="br.com.pizzariadomanolo.util.Formatador"%>
+<%@ page import = "br.com.pizzariadomanolo.util.Formatador" %>
 <%@ page import = "br.com.pizzariadomanolo.entidades.Pedido" %>
 <%@ page import = "br.com.pizzariadomanolo.entidades.Item" %>
 <%@ page import = "br.com.pizzariadomanolo.entidades.Cliente" %>
@@ -27,11 +27,6 @@
 			
 			Cliente cliente = (Cliente) session.getAttribute("cliente");
 			Pedido pedido = (Pedido) session.getAttribute("pedido");
-			
-			if (pedido == null) {
-				pedido = new Pedido();
-				pedido.criaPedido(cliente.getTelefone());
-			}
 			
 			for (Item i : pedido.getItens()) { 
 		%>

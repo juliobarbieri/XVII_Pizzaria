@@ -1,3 +1,5 @@
+<%@page import="br.com.pizzariadomanolo.DAO.POSTGRES.PizzaDAOPostgres"%>
+<%@page import="br.com.pizzariadomanolo.DAO.PizzaDAO"%>
 <html>
 	<head>
 		<title>Adicionar pizza</title>
@@ -28,8 +30,8 @@
 			Selecione uma pizza:<br> 
 			<select name = "pizza">   
 		<% 
-			Pizza pizza = new Pizza();
-			ArrayList<Pizza> cardapio = pizza.retireveAll();
+			PizzaDAO pizzaDAO = new PizzaDAOPostgres();
+			ArrayList<Pizza> cardapio = pizzaDAO.retireveAll();
 			  
 		    for(Pizza p : cardapio) {  
 		%> 

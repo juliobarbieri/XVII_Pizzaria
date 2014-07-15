@@ -1,8 +1,5 @@
 package br.com.pizzariadomanolo.entidades;
 
-import java.util.ArrayList;
-
-import br.com.pizzariadomanolo.DAO.POSTGRES.PizzaDAOPostgres;
 
 
 public class Pizza {
@@ -38,12 +35,7 @@ public class Pizza {
 		this.ingredientes = null;
 		this.preco = null;
 	}
-	
-	public ArrayList<Pizza> retireveAll(){
-		PizzaDAOPostgres pizzasBD = new PizzaDAOPostgres();
-		return pizzasBD.retireveAll();
-	}
-	
+
 
 	
 }

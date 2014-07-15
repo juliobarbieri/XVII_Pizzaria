@@ -1,3 +1,5 @@
+<%@ page import = "br.com.pizzariadomanolo.DAO.PizzaDAO" %>
+<%@ page import = "br.com.pizzariadomanolo.DAO.POSTGRES.PizzaDAOPostgres" %>
 <%@ page import = "br.com.pizzariadomanolo.util.Formatador" %>
 <%@ page import = "br.com.pizzariadomanolo.entidades.Pizza" %>
 <%@ page import = "br.com.pizzariadomanolo.entidades.Cliente" %>
@@ -50,8 +52,8 @@
 				<th>Preço</th>
 			</tr>
 		<%
-			Pizza pizza = new Pizza();
-			ArrayList<Pizza> cardapio = pizza.retireveAll();
+			PizzaDAO pizzaDAO = new PizzaDAOPostgres();
+			ArrayList<Pizza> cardapio = pizzaDAO.retireveAll();
 			
 			for (Pizza p : cardapio) { 
 		%>

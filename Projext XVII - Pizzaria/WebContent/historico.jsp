@@ -39,7 +39,7 @@
 			<tr>
 				<td> <%=pedido.getData()%> </td>
 				<td> <%=Formatador.retornaFormaPagamento(pedido.getFormaPagamento())%> </td>
-				<td> R$ <%= pedido.getTroco() %> </td>
+				<td> R$ <%= Formatador.retornaValorDinheiro(pedido.getTroco()) %> </td>
 				
 				<td>
 				<table border="1">

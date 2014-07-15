@@ -43,13 +43,13 @@ public class Login extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		ClienteDAOPostgres cadastro = new ClienteDAOPostgres();
 		
-		String usuario = request.getParameter("usuario");
+		String telefone = request.getParameter("telefone");
 		String senha = request.getParameter("senha");
 		
 		Cliente cliente = new Cliente();
 		Pedido pedido = new Pedido();
-		cliente.criaCliente(null, usuario, null, null);
-		pedido.criaPedido(usuario);
+		cliente.setTelefone(telefone);
+		pedido.criaPedido(telefone);
 		
 		if (cadastro.validaCliente(cliente, senha)) {
 			HttpSession session = request.getSession();
