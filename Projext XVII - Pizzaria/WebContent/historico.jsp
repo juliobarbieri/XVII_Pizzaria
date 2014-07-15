@@ -1,6 +1,6 @@
 <%@page import="br.com.pizzariadomanolo.DAO.POSTGRES.ItemDAOPostgres"%>
 <%@page import="br.com.pizzariadomanolo.DAO.ItemDAO"%>
-<%@page import="br.com.pizzariadomanolo.util.Validator"%>
+<%@page import="br.com.pizzariadomanolo.util.Formatador"%>
 <%@page import="br.com.pizzariadomanolo.util.FormaPagamento"%>
 <%@ page import = "br.com.pizzariadomanolo.DAO.POSTGRES.PedidoDAOPostgres"%>
 <%@ page import = "br.com.pizzariadomanolo.DAO.PedidoDAO"%>
@@ -32,12 +32,13 @@
 		<%
 			for (Pedido pedido : pedidos) {
 		%>
-				<% 
+		<%
 				ItemDAO itemDAO = new ItemDAOPostgres();
-				ArrayList<Item> itens = itemDAO.getItensByPedido(pedido); %>
+				ArrayList<Item> itens = itemDAO.getItensByPedido(pedido);
+		%>
 			<tr>
-				<td> <%= pedido.getData() %> </td>
-				<td> <%= Validator.retornaValor(pedido.getFormaPagamento()) %> </td>
+				<td> <%=pedido.getData()%> </td>
+				<td> <%=Formatador.retornaFormaPagamento(pedido.getFormaPagamento())%> </td>
 				<td> R$ <%= pedido.getTroco() %> </td>
 				
 				<td>
@@ -53,7 +54,7 @@
 						<tr>
 							<td> <%= item.getPizza().getNomePizza() %> </td>
 							<td> <%= item.getQuantidade() %> </td>
-							<td> R$ <%= item.getPizza().getPreco() * item.getQuantidade() %> </td>
+							<td> R$ <%= Formatador.retornaValorDinheiro(item.getPizza().getPreco() * item.getQuantidade()) %> </td>
 						</tr>
 				<%
 					}
@@ -67,6 +68,8 @@
 			}
 		%>
 		</table>
+		
+		<a href="index.jsp" >Página inicial</a>
 		
 	</body>
 </html>

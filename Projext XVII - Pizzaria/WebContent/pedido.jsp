@@ -1,3 +1,8 @@
+<%@page import="br.com.pizzariadomanolo.util.Formatador"%>
+<%@ page import = "br.com.pizzariadomanolo.entidades.Pedido" %>
+<%@ page import = "br.com.pizzariadomanolo.entidades.Item" %>
+<%@ page import = "br.com.pizzariadomanolo.entidades.Cliente" %>
+<%@ page import = "java.util.ArrayList" %>
 <html>
 	<head>
 		<title>Pedido</title>
@@ -10,10 +15,6 @@
 		</script>
 	</head>
 	<body>
-		<%@ page import = "br.com.pizzariadomanolo.entidades.Pedido" %>
-		<%@ page import = "br.com.pizzariadomanolo.entidades.Item" %>
-		<%@ page import = "br.com.pizzariadomanolo.entidades.Cliente" %>
-		<%@ page import = "java.util.ArrayList" %>
 				
 		<table border="1">
 			<tr>
@@ -37,7 +38,7 @@
 			<tr>
 				<td> <%= i.getPizza().getNomePizza() %> </td>
 				<td> <%= i.getQuantidade() %> </td>
-				<td> R$ <%= i.getTotal() %> </td>
+				<td> R$ <%= Formatador.retornaValorDinheiro(i.getTotal()) %> </td>
 				<td>
 					<form method="post"	action="Remove">
 						<input type="hidden" name="pizza" value="<%= i.getPizza().getNomePizza() %>">
@@ -52,6 +53,7 @@
 		</table>
      
 		<a href="javascript:abrePopup();" >Adicionar Pizzas</a>
+		<a href="index.jsp" >Página inicial</a>
 		<br><br>
 		<a href="fecharPedido.jsp" >Fechar pedido</a>
 		

@@ -15,6 +15,7 @@ import br.com.pizzariadomanolo.DAO.PedidoDAO;
 import br.com.pizzariadomanolo.DAO.POSTGRES.PedidoDAOPostgres;
 import br.com.pizzariadomanolo.entidades.Cliente;
 import br.com.pizzariadomanolo.entidades.Pedido;
+import br.com.pizzariadomanolo.util.FormaPagamento;
 
 /**
  * Servlet implementation class Pedido
@@ -56,7 +57,7 @@ public class FechaPedido extends HttpServlet {
 			out.println("<font color=red>Não há itens em seu pedido!</font>");
 			rs.include(request, response);
 		}
-		else if (formaPagamento.equals("dinhtrc")) {
+		else if (formaPagamento.equals(FormaPagamento.DINHTRC.toString())) {
 			try {
 				Float trocoFloat = Float.parseFloat(troco);
 				pedido.setTroco(trocoFloat);

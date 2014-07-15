@@ -1,8 +1,8 @@
 package br.com.pizzariadomanolo.util;
 
-public class Validator {
+public class Formatador {
 	
-	public static String retornaValor(String value) {
+	public static String retornaFormaPagamento(String value) {
 		if (FormaPagamento.CREDITO.toString().equals(value)) {
 			return FormaPagamento.CREDITO.getValue();
 		}
@@ -17,6 +17,11 @@ public class Validator {
 		}
 		return "Venda por telefone";
 		
+	}
+	
+	public static String retornaValorDinheiro(Float valor) {
+		return String.format("%.2f", valor);
+
 	}
 
 }

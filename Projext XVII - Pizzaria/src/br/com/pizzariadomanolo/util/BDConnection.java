@@ -5,17 +5,21 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class BDConnection {
+		
+	private static Connection conexao;
 	
 	public static Connection getConnection() {
-		Connection conexao;
 		try {
-			Class.forName("org.postgresql.Driver").newInstance();
 			
-			String url = "jdbc:postgresql://localhost:5432/pizza";
-			String user = "postgres";
-			String passwd = "postgres";
+			if (conexao == null) {
+				Class.forName("org.postgresql.Driver").newInstance();
+				
+				String url = "jdbc:postgresql://localhost:5432/pizza";
+				String user = "postgres";
+				String passwd = "postgres";
 			
-			conexao = DriverManager.getConnection(url, user, passwd);
+				conexao = DriverManager.getConnection(url, user, passwd);
+			}
 			
 			return conexao;
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {

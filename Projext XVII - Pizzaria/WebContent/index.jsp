@@ -1,11 +1,12 @@
+<%@ page import = "br.com.pizzariadomanolo.util.Formatador" %>
+<%@ page import = "br.com.pizzariadomanolo.entidades.Pizza" %>
+<%@ page import = "br.com.pizzariadomanolo.entidades.Cliente" %>
+<%@ page import = "java.util.ArrayList" %>
 <html>
 	<head>
 		<title>Home</title>
 	</head>
 	<body>
-		<%@ page import = "br.com.pizzariadomanolo.entidades.Pizza" %>
-		<%@ page import = "br.com.pizzariadomanolo.entidades.Cliente" %>
-		<%@ page import = "java.util.ArrayList" %>
 		
 		<% 	Cliente cliente = (Cliente) session.getAttribute("cliente");
 		
@@ -58,7 +59,7 @@
 			<tr>
 				<td> <%= p.getNomePizza() %> </td>
 				<td> <%= p.getIngredientes() %> </td>
-				<td> R$ <%= p.getPreco() %> </td>
+				<td> R$ <%= Formatador.retornaValorDinheiro(p.getPreco()) %> </td>
 			</tr>
 		<%		
 			}

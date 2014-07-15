@@ -33,7 +33,7 @@
 			  
 		    for(Pizza p : cardapio) {  
 		%> 
-		        	<option value = <%= p.getNomePizza() %> > <%= p.getNomePizza() %></option>
+		        	<option value = "<%= p.getNomePizza() %>" > <%= p.getNomePizza() %></option>
 		<% 
 		 	}  
 		%>  

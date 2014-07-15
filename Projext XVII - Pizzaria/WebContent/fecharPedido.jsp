@@ -26,5 +26,7 @@
 			</div>
 			<input type="submit" value="Fechar pedido">
 		</form>
+		<br>
+		<a href="index.jsp" >Página inicial</a>
 	</body>
 </html>
