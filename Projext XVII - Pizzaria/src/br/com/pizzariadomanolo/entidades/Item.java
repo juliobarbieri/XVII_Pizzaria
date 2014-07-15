@@ -5,6 +5,7 @@ public class Item {
 	private Integer id;
 	private Pizza pizza;
 	private Integer quantidade;
+	private Pedido pedido;
 	
 	public int getId() {
 		return id;
@@ -20,6 +21,26 @@ public class Item {
 	
 	public Pizza getPizza(){
 		return pizza;
+	}
+	
+	public Pedido getPedido() {
+		return pedido;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
+	
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
+	
+	public void setPizza(Pizza pizza) {
+		this.pizza = pizza;
 	}
 	
 	public void criaItem(Pizza pizza, int quantidade) {

@@ -35,6 +35,7 @@
 			} else { 
 		%>
 			<a href="pedido.jsp" >Pedido</a>
+			<a href="historico.jsp" >Histórico de Pedidos</a>
 			<a href="Logout" >Logout</a>
 		<%
 			}

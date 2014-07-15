@@ -31,6 +31,10 @@ public class Pedido {
 		return itens;
 	}
 	
+	public void setItens(List<Item> itens) {
+		this.itens.addAll(itens);
+	}
+	
 	public void setData(Timestamp data){
 		this.data = data;
 	}

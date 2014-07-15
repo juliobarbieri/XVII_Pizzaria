@@ -5,9 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import br.com.pizzariadomanolo.DAO.ItemDAO;
 import br.com.pizzariadomanolo.DAO.PedidoDAO;
 import br.com.pizzariadomanolo.entidades.Item;
 import br.com.pizzariadomanolo.entidades.Pedido;
@@ -71,6 +73,44 @@ public class PedidoDAOPostgres implements PedidoDAO {
 		}
 		return true;
 
+	}
+
+	@Override
+	public ArrayList<Pedido> getPedidosByTelefone(String telefone) {
+		Connection conexao;
+		PreparedStatement comandoSQL;
+		ResultSet resultado;
+		
+		ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
+		
+		ItemDAO itemDAO = new ItemDAOPostgres();
+		try {
+			conexao = BDConnection.getConnection();
+			comandoSQL = conexao.prepareStatement("SELECT * FROM PEDIDO WHERE telefone = ?");
+			comandoSQL.setString(1, telefone);
+			resultado = comandoSQL.executeQuery();
+			
+			while (resultado.next()) {
+				Pedido pedido = new Pedido();
+				pedido.criaPedido(telefone);
+				pedido.setId(resultado.getInt("id"));
+				pedido.setData(resultado.getTimestamp("data_hora"));
+				pedido.setFormaPagamento(resultado.getString("forma_pagamento"));
+				pedido.setTroco(resultado.getFloat("troco"));
+				
+				pedido.setItens(itemDAO.getItensByPedido(pedido));
+				
+				pedidos.add(pedido);
+				pedido.clear();
+			}
+			resultado.close();
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return pedidos;
 	}
 
 }

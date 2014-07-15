@@ -4,7 +4,7 @@
 		<script type="text/javascript">  
 		    function changeVisibility(value)
 		    {  
-		        if (value == "dinhtrc")  
+		        if (value == "DINHTRC")  
 		            document.getElementById("troco").style.display='block';
 		        else
 		        	document.getElementById("troco").style.display='none';
@@ -15,10 +15,10 @@
 		<form method="post"	action="FechaPedido">
 			Forma de pagamento:<br> 
 			<select name = "formaPagamento" onchange="changeVisibility(this.value)">
-		        <option value ="credito">Cartão de Crédito</option>
-		        <option value ="debito">Cartão de Débito</option>
-		        <option value ="dinheiro">Dinheiro</option>
-		        <option value ="dinhtrc">Dinheiro com troco</option>
+		        <option value ="CREDITO">Cartão de Crédito</option>
+		        <option value ="DEBITO">Cartão de Débito</option>
+		        <option value ="DINHEIRO">Dinheiro</option>
+		        <option value ="DINHTRC">Dinheiro com troco</option>
 		    </select>  
 			<br>
 			<div id="troco" style="display:none">Entre com o troco:<br>
