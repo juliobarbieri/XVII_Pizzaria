@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import br.com.pizzariadomanolo.DAO.ItemDAO;
 import br.com.pizzariadomanolo.DAO.PizzaDAO;
@@ -36,7 +35,7 @@ public class ItemDAOPostgres implements ItemDAO {
 	}
 	
 	@Override
-	public List<Item> getItensByPedido(Pedido pedido) {
+	public ArrayList<Item> getItensByPedido(Pedido pedido) {
 		Connection conexao;
 		PreparedStatement comandoSQL;
 		ResultSet resultado;
@@ -63,8 +62,6 @@ public class ItemDAOPostgres implements ItemDAO {
 				item.setPedido(pedido);
 				
 				itens.add(item);
-				item.clear();
-				pizza.clear();
 			}
 			resultado.close();
 			
