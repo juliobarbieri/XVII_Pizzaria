@@ -7,7 +7,6 @@
 		<title>Home</title>
 	</head>
 	<body>
-		
 		<% 	Cliente cliente = (Cliente) session.getAttribute("cliente");
 		
 			String nome;

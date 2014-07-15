@@ -12,4 +12,12 @@
   <session-config>
     <session-timeout>-1</session-timeout>
   </session-config>
+  <servlet>
+  	<servlet-name>logout</servlet-name>
+  	<servlet-class>br.com.pizzariadomanolo.servlets.Logout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>logout</servlet-name>
+  	<url-pattern>/logout/*</url-pattern>
+  </servlet-mapping>
 </web-app>
