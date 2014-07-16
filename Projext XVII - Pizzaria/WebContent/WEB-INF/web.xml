@@ -20,4 +20,12 @@
   	<servlet-name>logout</servlet-name>
   	<url-pattern>/logout/*</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>redirect</servlet-name>
+  	<servlet-class>br.com.pizzariadomanolo.servlets.Redirect</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>redirect</servlet-name>
+  	<url-pattern>/redirect/*</url-pattern>
+  </servlet-mapping>
 </web-app>

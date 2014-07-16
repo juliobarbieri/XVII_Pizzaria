@@ -10,7 +10,7 @@
 		<script type="text/javascript">
 			function abrePopup()
 			{
-				window.open("addPizza.jsp", "nome", "width='200', height='200', scrollbars='no', location=no, directories=no, status=no, menubar=no, toolbar=no, resizable=no");
+				window.open("Redirect?page=addPizza.jsp", "nome", "width='200', height='200', scrollbars='no', location=no, directories=no, status=no, menubar=no, toolbar=no, resizable=no");
 			}
 		</script>
 	</head>
@@ -50,7 +50,7 @@
 		<a href="javascript:abrePopup();" >Adicionar Pizzas</a>
 		<a href="index.jsp" >Página inicial</a>
 		<br><br>
-		<a href="fecharPedido.jsp" >Fechar pedido</a>
+		<a href="Redirect?page=fecharPedido.jsp" >Fechar pedido</a>
 		
 	</body>
 </html>
