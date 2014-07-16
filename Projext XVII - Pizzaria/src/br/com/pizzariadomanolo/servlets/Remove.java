@@ -47,7 +47,7 @@ public class Remove extends HttpServlet {
 		
 		session.setAttribute("pedido", pedido);
 		
-		response.sendRedirect("pedido.jsp");
+		response.sendRedirect("/WEB-INF/pedido.jsp");
 	}
 
 }

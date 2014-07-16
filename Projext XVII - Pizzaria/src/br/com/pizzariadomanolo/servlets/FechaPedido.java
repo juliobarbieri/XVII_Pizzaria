@@ -52,7 +52,7 @@ public class FechaPedido extends HttpServlet {
 		pedido.setFormaPagamento(formaPagamento);
 		
 		if (pedido.getItens().isEmpty()) {
-			RequestDispatcher rs = request.getRequestDispatcher("fecharPedido.jsp");
+			RequestDispatcher rs = request.getRequestDispatcher("/WEB-INF/fecharPedido.jsp");
 			PrintWriter out = response.getWriter();
 			out.println("<font color=red>Não há itens em seu pedido!</font>");
 			rs.include(request, response);
@@ -63,7 +63,7 @@ public class FechaPedido extends HttpServlet {
 				pedido.setTroco(trocoFloat);
 				salvaPedido(session, response, pedido);
 			} catch (NumberFormatException e) {
-				RequestDispatcher rs = request.getRequestDispatcher("fecharPedido.jsp");
+				RequestDispatcher rs = request.getRequestDispatcher("/WEB-INF/fecharPedido.jsp");
 				PrintWriter out = response.getWriter();
 				out.println("<font color=red>Troco em formato errado!</font>");
 				rs.include(request, response);
