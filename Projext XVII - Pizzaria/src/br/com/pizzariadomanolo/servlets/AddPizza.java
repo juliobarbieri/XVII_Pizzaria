@@ -52,9 +52,11 @@ public class AddPizza extends HttpServlet {
 		HttpSession session = request.getSession();
 		Pedido pedido = (Pedido) session.getAttribute("pedido");
 		
-		pedido.adicionarItem(pizza, Integer.parseInt(quantidade));
+		if (!"".equals(quantidade.trim())) {
+			pedido.adicionarItem(pizza, Integer.parseInt(quantidade));
 		
-		session.setAttribute("pedido", pedido);
+			session.setAttribute("pedido", pedido);
+		}
 	}
 
 }

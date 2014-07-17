@@ -89,9 +89,13 @@ public class Pedido {
 			itens.remove(itemParaExluir);
 		}
 	}
-
-
 	
-	
+	public Float getValorTotal() {
+		float valorTotal = 0;
+		for (Item item : itens) {
+			valorTotal += item.getTotal();
+		}
+		return valorTotal;
+	}
 	
 }

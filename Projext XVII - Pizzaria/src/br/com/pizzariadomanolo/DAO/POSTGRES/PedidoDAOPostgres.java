@@ -98,10 +98,10 @@ public class PedidoDAOPostgres implements PedidoDAO {
 				pedido.setFormaPagamento(resultado.getString("forma_pagamento"));
 				pedido.setTroco(resultado.getFloat("troco"));
 				
-				pedido.setItens(itemDAO.getItensByPedido(pedido));
+				ArrayList<Item> itens = itemDAO.getItensByPedido(pedido);
+				pedido.setItens(itens);
 				
 				pedidos.add(pedido);
-				pedido.clear();
 			}
 			resultado.close();
 			

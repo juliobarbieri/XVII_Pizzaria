@@ -46,11 +46,12 @@
 			}
 		%>
 		</table>
+		<strong>Total à pagar:</strong> R$ <%= Formatador.retornaValorDinheiro(pedido.getValorTotal()) %> <br><br>
      
 		<a href="javascript:abrePopup();" >Adicionar Pizzas</a>
-		<a href="index.jsp" >Página inicial</a>
-		<br><br>
 		<a href="Redirect?page=fecharPedido.jsp" >Fechar pedido</a>
+		<br><br>
+		<a href="index.jsp" >Página inicial</a>
 		
 	</body>
 </html>
