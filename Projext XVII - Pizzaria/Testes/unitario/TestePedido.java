@@ -37,6 +37,18 @@ public class TestePedido {
 	}
 	
 	@Test
+	public void removerItemTest() {
+		pedido.criaPedido("telefone");
+		Pizza pizza = new Pizza();
+		pizza.criaPizza("pizza", "ingredientes", "4");
+		assertNotNull(pizza);
+		pedido.adicionarItem(pizza, 1);
+		pedido.removerItem("pizza", 1);
+		assertEquals(pedido.getItens().size(), 0);
+
+	}
+	
+	@Test
 	public void getIdTest(){
 		assertNull(pedido.getId());
 	}

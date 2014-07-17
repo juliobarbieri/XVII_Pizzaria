@@ -20,7 +20,7 @@ public class LoginTestInterface {
 	@Test
 	public void logando(){
 		WebDriver driver = new FirefoxDriver();
-		driver.navigate().to("http://localhost/pizzariadomanolo/login.jsp");
+		driver.navigate().to("http://localhost:8080/pizzariadomanolo/login.jsp");
 		
 		WebElement form = driver.findElement(By.tagName("form"));
 		

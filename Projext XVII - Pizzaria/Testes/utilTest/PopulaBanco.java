@@ -23,10 +23,11 @@ public class PopulaBanco {
 		Connection conexao;
 		PreparedStatement comandoSQL;
 		
-		String sql = "DELETE FROM CLIENTE WHERE telefone='"+String.valueOf(123456)+"' ;";		
+		String sql = "DELETE FROM CLIENTE WHERE telefone = ?;";		
 		try {
 			conexao = BDConnection.getConnection();
 			comandoSQL = conexao.prepareStatement(sql);
+			comandoSQL.setString(1, "123456");
 			comandoSQL.executeUpdate();
 		} catch (SQLException e) {
 			 return false;

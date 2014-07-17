@@ -24,7 +24,7 @@ public class PedidoTestInterface {
 	@Test
 	public void cadastrarPedido(){
 		WebDriver driver = new FirefoxDriver();
-		driver.navigate().to("http://localhost/pizzariadomanolo/login.jsp");
+		driver.navigate().to("http://localhost:8080/pizzariadomanolo/login.jsp");
 		
 		WebElement form = driver.findElement(By.tagName("form"));
 		
@@ -39,19 +39,25 @@ public class PedidoTestInterface {
 		
 		assertEquals("Adicionar Pizzas",linkPizza);
 		
-		driver.navigate().to("http://localhost/pizzariadomanolo/Redirect?page=addPizza.jsp");
+		driver.navigate().to("http://localhost:8080/pizzariadomanolo/Redirect?page=addPizza.jsp");
 		
 		form = driver.findElement(By.tagName("form"));
 		
-		driver.findElement(By.name(("quantidade"))).sendKeys("1"); //foi até aqui, não consigo pegar o botão remover
+		driver.findElement(By.name(("quantidade"))).sendKeys("1");
 		
 		form.submit();
 		
-		driver.navigate().to("http://localhost/pizzariadomanolo/Redirect?page=pedido.jsp");
+		driver.navigate().to("http://localhost:8080/pizzariadomanolo/Redirect?page=fecharPedido.jsp");
 		
-				
-		driver.findElement(By.tagName("Remover")).submit();
+
+		form = driver.findElement(By.tagName("form"));
 		
+		driver.findElement(By.name(("formaPagamento"))).sendKeys("CREDITO");
+		
+		form.submit();
+		
+		String linkLogout = driver.findElement(By.linkText("Logout")).getText();
+		assertEquals("Logout", linkLogout);
 
 		
 	}

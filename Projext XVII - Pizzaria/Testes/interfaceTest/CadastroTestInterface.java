@@ -13,7 +13,7 @@ public class CadastroTestInterface {
 	public void entrarCadastro(){
 		
 		WebDriver driver = new FirefoxDriver();
-		driver.navigate().to("http://localhost/pizzariadomanolo/index.jsp");
+		driver.navigate().to("http://localhost:8080/pizzariadomanolo/index.jsp");
 		
 		driver.findElement(By.linkText("Cadastro")).click();
 				
